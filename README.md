@@ -14,6 +14,7 @@ Features:
 - [ ] Support for global theming and app variables when building own UI screens
 - [ ] Support for defining and using props for UI screens
 - [ ] Preview auto-refresh when a change is made in the UI screen
+- [ ] Multiple users per project
 
 ### How to use it?
 * You can setup this app builder to run locally on your machine and use it without restrictions.
