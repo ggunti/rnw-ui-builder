@@ -15,6 +15,11 @@ Features:
 - [ ] Support for defining and using props for UI screens
 - [ ] Preview auto-refresh when a change is made in the UI screen
 
+### How to use it?
+* You can setup this app builder to run locally on your machine and use it without restrictions.
+
+* A much simpler approach to use this app builder is to create an account at [RNW Builder](https://order-software.com/appBuilder). Currently it is 100% free to use and will always have a free plan. Affordable paid plans may come in the future in order to be able to continue the development of this project and support it's growth.
+
 ### License clarifications
 Any modification to this app builder project which is used in commercial purposes must be also open-sourced under same license or ask for permission.
 
