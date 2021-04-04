@@ -1,4 +1,4 @@
-# react-native-web-app-builder
+# rnw-app-builder
 App builder for android &amp; iOS &amp; web based on react-native-web.
 
 **Currently this project works as a UI builder which is able to generate react-native-web compatible code that runs on android & iOS & web. Logic building is not possible yet, although it is a goal.**
