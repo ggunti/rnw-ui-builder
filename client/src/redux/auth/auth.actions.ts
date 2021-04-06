@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAction } from 'redux-actions';
+import { getErrMsg } from '../../utils/err';
 import { AppThunk } from '../store';
 import { TokenType, UserType } from '../../types';
 
@@ -52,9 +53,10 @@ export function signup(
         onSuccess();
       })
       .catch((err) => {
+        const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingSignup());
-        dispatch(setSignupError(err.message));
-        onError(err.message);
+        dispatch(setSignupError(errMsg));
+        onError(errMsg);
       });
   };
 }
@@ -84,9 +86,10 @@ export function login(
         onSuccess(user, data.token);
       })
       .catch((err) => {
+        const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingLogin());
-        dispatch(setLoginError(err.message));
-        onError(err.message);
+        dispatch(setLoginError(errMsg));
+        onError(errMsg);
       });
   };
 }
@@ -111,9 +114,10 @@ export function logout(
         onSuccess();
       })
       .catch((err) => {
+        const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingLogout());
-        dispatch(setLogoutError(err.message));
-        onError(err.message);
+        dispatch(setLogoutError(errMsg));
+        onError(errMsg);
       });
   };
 }
@@ -142,9 +146,10 @@ export function verifyToken(
         onSuccess(user);
       })
       .catch((err) => {
+        const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingVerifyToken());
-        dispatch(setVerifyTokenError(err.message));
-        onError(err.message);
+        dispatch(setVerifyTokenError(errMsg));
+        onError(errMsg);
       });
   };
 }
@@ -169,9 +174,10 @@ export function sendVerificationEmail(
         onSuccess();
       })
       .catch((err) => {
+        const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingSendVerificationEmail());
-        dispatch(setSendVerificationEmailError(err.message));
-        onError(err.message);
+        dispatch(setSendVerificationEmailError(errMsg));
+        onError(errMsg);
       });
   };
 }

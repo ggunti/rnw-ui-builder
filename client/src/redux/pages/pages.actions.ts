@@ -1,6 +1,7 @@
 import axios from 'axios';
 import fileDownload from 'js-file-download';
 import { createAction } from 'redux-actions';
+import { getErrMsg } from '../../utils/err';
 import { PagesState } from './pages.types';
 import { AppThunk } from '../store';
 import { PageType } from '../../types';
@@ -62,9 +63,10 @@ export function getPages(
         onSuccess(pages);
       })
       .catch((err) => {
+        const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingGetPages());
-        dispatch(setGetPagesError(err.message));
-        onError(err.message);
+        dispatch(setGetPagesError(errMsg));
+        onError(errMsg);
       });
   };
 }
@@ -90,9 +92,10 @@ export function getPage(
         onSuccess(page);
       })
       .catch((err) => {
+        const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingGetPage());
-        dispatch(setGetPageError(err.message));
-        onError(err.message);
+        dispatch(setGetPageError(errMsg));
+        onError(errMsg);
       });
   };
 }
@@ -118,9 +121,10 @@ export function createPage(
         onSuccess(page);
       })
       .catch((err) => {
+        const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingCreatePage());
-        dispatch(setCreatePageError(err.message));
-        onError(err.message);
+        dispatch(setCreatePageError(errMsg));
+        onError(errMsg);
       });
   };
 }
@@ -146,9 +150,10 @@ export function deletePage(
         onSuccess(page);
       })
       .catch((err) => {
+        const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingDeletePage());
-        dispatch(setDeletePageError(err.message));
-        onError(err.message);
+        dispatch(setDeletePageError(errMsg));
+        onError(errMsg);
       });
   };
 }
@@ -174,9 +179,10 @@ export function updatePage(
         onSuccess(data.page);
       })
       .catch((err) => {
+        const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingUpdatePage());
-        dispatch(setUpdatePageError(err.message));
-        onError(err.message);
+        dispatch(setUpdatePageError(errMsg));
+        onError(errMsg);
       });
   };
 }
@@ -210,9 +216,10 @@ export function generateCode(
         onSuccess();
       })
       .catch((err) => {
+        const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingGenerateCode());
-        dispatch(setGenerateCodeError(err.message));
-        onError(err.message);
+        dispatch(setGenerateCodeError(errMsg));
+        onError(errMsg);
       });
   };
 }

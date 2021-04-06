@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAction } from 'redux-actions';
+import { getErrMsg } from '../../utils/err';
 import { ProjectsState } from './projects.types';
 import { AppThunk } from '../store';
 import { ProjectType } from '../../types';
@@ -40,9 +41,10 @@ export function getProjects(
         onSuccess(projects);
       })
       .catch((err) => {
+        const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingGetProjects());
-        dispatch(setGetProjectsError(err.message));
-        onError(err.message);
+        dispatch(setGetProjectsError(errMsg));
+        onError(errMsg);
       });
   };
 }
@@ -68,9 +70,10 @@ export function createProject(
         onSuccess(project);
       })
       .catch((err) => {
+        const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingCreateProject());
-        dispatch(setCreateProjectError(err.message));
-        onError(err.message);
+        dispatch(setCreateProjectError(errMsg));
+        onError(errMsg);
       });
   };
 }
