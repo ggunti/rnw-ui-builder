@@ -94,6 +94,7 @@ class ProjectEditorPage extends Component<ProjectEditorPageProps, ProjectEditorP
         setModalVisible={(modalVisible) => this.setState({ modalVisible })}
         newPageName={this.state.newPageName}
         setNewPageName={(newPageName) => this.setState({ newPageName })}
+        addDisabled={this.state.newPageName.length === 0}
         onAddNewPage={this.onAddNewPage}
         onPressDeletePage={this.onPressDeletePage}
         onPressPage={this.onPressPage}

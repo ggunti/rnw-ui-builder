@@ -73,6 +73,7 @@ class ProjectsPage extends Component<ProjectsPageProps, ProjectsPageState> {
         toggleAddModalVisible={() => this.setState((prevState) => ({ addModalVisible: !prevState.addModalVisible }))}
         newProjectName={this.state.newProjectName}
         setNewProjectName={(newProjectName) => this.setState({ newProjectName })}
+        addDisabled={this.state.newProjectName.length === 0}
         onPressAdd={this.onPressAdd}
       />
     );

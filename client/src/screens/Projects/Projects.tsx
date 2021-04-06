@@ -16,6 +16,7 @@ interface ProjectsProps {
   toggleAddModalVisible: () => void;
   newProjectName: string;
   setNewProjectName: (newProjectName: string) => void;
+  addDisabled: boolean;
   onPressAdd: () => void;
 }
 
@@ -56,7 +57,7 @@ class Projects extends Component<ProjectsProps> {
               value={this.props.newProjectName}
               onChangeText={this.props.setNewProjectName}
             />
-            <Button type='outline' title='Add' onPress={this.props.onPressAdd} />
+            <Button type='outline' title='Add' disabled={this.props.addDisabled} onPress={this.props.onPressAdd} />
           </View>
         </Overlay>
       </Layout>

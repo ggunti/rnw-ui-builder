@@ -21,6 +21,7 @@ interface ProjectEditorProps {
   setModalVisible: (modalVisible: boolean) => void;
   newPageName: string;
   setNewPageName: (newPageName: string) => void;
+  addDisabled: boolean;
   onAddNewPage: () => void;
   onPressDeletePage: (id: number) => void;
   onPressPage: (id: number) => void;
@@ -61,7 +62,7 @@ function ProjectEditor(props: ProjectEditorProps) {
       <Overlay isVisible={props.modalVisible} onBackdropPress={() => props.setModalVisible(false)}>
         <View>
           <Input placeholder='Page name' value={props.newPageName} onChangeText={props.setNewPageName} />
-          <Button type='outline' title='Add' onPress={props.onAddNewPage} />
+          <Button type='outline' title='Add' disabled={props.addDisabled} onPress={props.onAddNewPage} />
         </View>
       </Overlay>
     </Layout>
