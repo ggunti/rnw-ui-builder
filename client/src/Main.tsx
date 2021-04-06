@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import SplashPage from './screens/Splash/Splash.page';
 import Router from './Router/Router';
 // redux store
 import { store } from './redux/store';
@@ -48,10 +49,10 @@ class Main extends Component<MainProps, MainState> {
     store.dispatch(verifyToken(onSuccess, onError));
   };
 
-  _showRouter = () => this.setState({ resolved: true });
+  _showRouter = () => setTimeout(() => this.setState({ resolved: true }), 500);
 
   render() {
-    return <Provider store={store}>{this.state.resolved ? <Router /> : null}</Provider>;
+    return <Provider store={store}>{this.state.resolved ? <Router /> : <SplashPage />}</Provider>;
   }
 }
 
