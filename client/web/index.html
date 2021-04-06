@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style type="text/css">
+    /* These styles make the body full-height */
+    html, body { height: 100%; }
+    /* These styles disable body scrolling if you are using <ScrollView> */
+    /* body { overflow: hidden; } */
+    /* These styles make the root element full-height */
+    #app-root { display: flex; height: 100%; }
+    <!-- Required for the 'RenderNode.tsx' component for showing active / hovered box -->
+    .component-selected {
+      position: relative;
+    }
+
+    .component-selected::after {
+      content: ' ';
+      border: 1px dashed #2680eb;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      pointer-events: none;
+      display: block;
+    }
+  </style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      RNW App Builder
+    </title>
+  </head>
+  <body>
+    <div id="app-root"></div>
+  </body>
+</html>
