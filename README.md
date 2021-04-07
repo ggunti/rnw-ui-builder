@@ -7,9 +7,9 @@ Features:
 - [x] Multiple projects for each registered user
 - [x] Multiple pages (screens) per project
 - [x] Drag and drop UI elements
-- [x] Ability to customize UI elements and instantly see any changes
+- [x] Ability to customize UI elements and instantly see every change
 - [x] Ability to preview built pages on android & iOS & web
-- [x] Generate react / react-native code based on built UI screens
+- [x] Generate react-native-web compatible code based on built UI screens
 - [ ] Ability to build logic
 - [ ] Support for global theming and app variables when building own UI screens
 - [ ] Support for defining and using props for UI screens
