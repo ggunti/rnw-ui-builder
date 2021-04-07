@@ -11,6 +11,10 @@ const INITIAL_STATE: ProjectsState = {
   loadingCreateProject: false,
   hasErrorCreateProject: false,
   errorMessageCreateProject: '',
+  // generateProjectCode
+  loadingGenerateProjectCode: false,
+  hasErrorGenerateProjectCode: false,
+  errorMessageGenerateProjectCode: '',
 };
 
 export default (state = INITIAL_STATE, action: any): ProjectsState => {
@@ -35,6 +39,15 @@ export default (state = INITIAL_STATE, action: any): ProjectsState => {
       return { ...state, hasErrorCreateProject: true, errorMessageCreateProject: action.payload };
     case PROJECTS.HIDE_CREATE_PROJECT_ERROR:
       return { ...state, hasErrorCreateProject: false, errorMessageCreateProject: '' };
+    // generateProjectCode
+    case PROJECTS.START_LOADING_GENERATE_PROJECT_CODE:
+      return { ...state, loadingGenerateProjectCode: true };
+    case PROJECTS.FINISH_LOADING_GENERATE_PROJECT_CODE:
+      return { ...state, loadingGenerateProjectCode: false };
+    case PROJECTS.SET_GENERATE_PROJECT_CODE_ERROR:
+      return { ...state, hasErrorGenerateProjectCode: true, errorMessageGenerateProjectCode: action.payload };
+    case PROJECTS.HIDE_GENERATE_PROJECT_CODE_ERROR:
+      return { ...state, hasErrorGenerateProjectCode: false, errorMessageGenerateProjectCode: '' };
     default:
       return state;
   }

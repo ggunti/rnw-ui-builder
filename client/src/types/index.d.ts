@@ -30,7 +30,7 @@ export type PageType = {
   id: number;
   projectId: number;
   name: string;
-  compressedState?: string;
+  json?: string;
 };
 
 export type Node = {

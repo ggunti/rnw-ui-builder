@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+         ProAI\Handlebars\HandlebarsServiceProvider::class,
 
         /*
          * Application Service Providers...

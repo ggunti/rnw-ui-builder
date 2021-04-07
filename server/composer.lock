@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "206fc2004acbf554e3f0d6fb31190563",
+    "content-hash": "5dec18a93c287a6f7b0e2be3783c259c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -895,16 +895,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.35.1",
+            "version": "v8.36.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "d118c0df39e7524131176aaf76493eae63a8a602"
+                "reference": "91c454715b81b9a39f718651d4e2f8104d45e7c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d118c0df39e7524131176aaf76493eae63a8a602",
-                "reference": "d118c0df39e7524131176aaf76493eae63a8a602",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/91c454715b81b9a39f718651d4e2f8104d45e7c2",
+                "reference": "91c454715b81b9a39f718651d4e2f8104d45e7c2",
                 "shasum": ""
             },
             "require": {
@@ -1059,7 +1059,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-03-30T21:34:17+00:00"
+            "time": "2021-04-06T21:14:06+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1895,6 +1895,69 @@
                 }
             ],
             "time": "2020-07-20T17:29:33+00:00"
+        },
+        {
+            "name": "proai/laravel-handlebars",
+            "version": "1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ProAI/laravel-handlebars.git",
+                "reference": "20b5c082d63178d383e4f54c515307068098c851"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ProAI/laravel-handlebars/zipball/20b5c082d63178d383e4f54c515307068098c851",
+                "reference": "20b5c082d63178d383e4f54c515307068098c851",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/view": "^6.0|^7.0|^8.0",
+                "php": "^7.2",
+                "zordius/lightncandy": "1.2.*"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.3",
+                "phpunit/phpunit": "^9.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ProAI\\Handlebars\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Markus J. Wetzel",
+                    "email": "markuswetzel@gmx.net"
+                },
+                {
+                    "name": "Manuel Wieser",
+                    "email": "office@manuelwieser.com"
+                }
+            ],
+            "description": "A Laravel 7 wrapper for LightnCandy for using the Handlebars (and Mustache) template engine.",
+            "homepage": "http://github.com/proai/laravel-handlebars",
+            "keywords": [
+                "handlebars",
+                "laravel",
+                "lightncandy",
+                "mustache",
+                "template engine"
+            ],
+            "support": {
+                "issues": "https://github.com/ProAI/laravel-handlebars/issues",
+                "source": "https://github.com/ProAI/laravel-handlebars/tree/1.11.0"
+            },
+            "time": "2020-10-26T14:59:03+00:00"
         },
         {
             "name": "psr/container",
@@ -5152,6 +5215,62 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.10.0"
             },
             "time": "2021-03-09T10:59:23+00:00"
+        },
+        {
+            "name": "zordius/lightncandy",
+            "version": "v1.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zordius/lightncandy.git",
+                "reference": "37aa381e0f27d411a630062070c7a5a2174c62e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zordius/lightncandy/zipball/37aa381e0f27d411a630062070c7a5a2174c62e7",
+                "reference": "37aa381e0f27d411a630062070c7a5a2174c62e7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LightnCandy\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zordius Chen",
+                    "email": "zordius@gmail.com"
+                }
+            ],
+            "description": "An extremely fast PHP implementation of handlebars ( http://handlebarsjs.com/ ) and mustache ( http://mustache.github.io/ ).",
+            "homepage": "https://github.com/zordius/lightncandy",
+            "keywords": [
+                "handlebars",
+                "logicless",
+                "mustache",
+                "php",
+                "template"
+            ],
+            "support": {
+                "issues": "https://github.com/zordius/lightncandy/issues",
+                "source": "https://github.com/zordius/lightncandy/tree/master"
+            },
+            "time": "2020-03-08T06:00:24+00:00"
         }
     ],
     "packages-dev": [
@@ -5608,16 +5727,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.4.10",
+            "version": "v1.4.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "4f0b2bac128ee60a11d9758651f103f78157474a"
+                "reference": "e46a3228da4e95a411a981ac807bd119ab2485fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/4f0b2bac128ee60a11d9758651f103f78157474a",
-                "reference": "4f0b2bac128ee60a11d9758651f103f78157474a",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/e46a3228da4e95a411a981ac807bd119ab2485fa",
+                "reference": "e46a3228da4e95a411a981ac807bd119ab2485fa",
                 "shasum": ""
             },
             "require": {
@@ -5664,7 +5783,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2021-03-30T21:26:44+00:00"
+            "time": "2021-04-06T14:00:39+00:00"
         },
         {
             "name": "mockery/mockery",

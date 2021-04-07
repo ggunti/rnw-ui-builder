@@ -3,8 +3,8 @@ import { connect, ConnectedProps } from 'react-redux';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import PageEditor from './PageEditor';
-import { createPage } from '../../templates/page';
-import { createComponent, getComponentNames } from '../../templates/component';
+import { generatePage } from '../../templates/page';
+import { generateComponent, getComponentNames } from '../../templates/component';
 import { userComponents } from '../../UiEditor/user';
 import {
   // pages - entity
@@ -15,9 +15,9 @@ import {
   // updatePage - function
   updatePage,
   hideUpdatePageError,
-  // generateCode - function
-  generateCode,
-  hideGenerateCodeError,
+  // generatePageCode - function
+  generatePageCode,
+  hideGeneratePageCodeError,
 } from '../../redux/actions';
 import { RootState } from '../../redux/store';
 import { StackParamList, PageType } from '../../types';
@@ -54,8 +54,10 @@ class PageEditorPage extends Component<PageEditorPageProps, PageEditorPageState>
     this.props.getPage({ id: this.pageId }, onSuccess, onError);
   };
 
-  onPressSave = (compressedState: string) => {
-    const updatedPage = { ...this.state.page, compressedState };
+  onPressSave = (serializedJson: string) => {
+    console.log(generatePage(JSON.parse(serializedJson)));
+
+    const updatedPage = { ...this.state.page, json: serializedJson };
     const pages = [...this.props.pages];
     const pageIndex = pages.findIndex((p) => p.id === this.pageId);
     pages[pageIndex] = updatedPage;
@@ -66,32 +68,32 @@ class PageEditorPage extends Component<PageEditorPageProps, PageEditorPageState>
 
   onPressGenerateCode = (serializedJson: string) => {
     const nodes = JSON.parse(serializedJson);
-    const page = { id: this.pageId, name: this.state.page.name, content: createPage(nodes) };
+    const page = { id: this.pageId, name: this.state.page.name, content: generatePage(nodes) };
     const componentNames = getComponentNames(nodes);
     const components = componentNames.map((name) => ({
       name,
       // @ts-ignore
-      content: createComponent(userComponents[name].template),
+      content: generateComponent(userComponents[name].template),
     }));
 
     const onSuccess = () => {};
     const onError = () => {};
-    this.props.generateCode({ projectId: this.state.page.projectId, page, components }, onSuccess, onError);
+    this.props.generatePageCode({ projectId: this.state.page.projectId, page, components }, onSuccess, onError);
   };
 
   onHideError = () => {
     this.props.hideGetPageError();
     this.props.hideUpdatePageError();
-    this.props.hideGenerateCodeError();
+    this.props.hideGeneratePageCodeError();
   };
 
   render() {
     return (
       <PageEditor
-        loading={this.props.loadingGetPage || this.props.loadingUpdatePage || this.props.loadingGenerateCode}
-        hasError={this.props.hasErrorGetPage || this.props.hasErrorUpdatePage || this.props.hasErrorGenerateCode}
+        loading={this.props.loadingGetPage || this.props.loadingUpdatePage || this.props.loadingGeneratePageCode}
+        hasError={this.props.hasErrorGetPage || this.props.hasErrorUpdatePage || this.props.hasErrorGeneratePageCode}
         errorMessage={
-          this.props.errorMessageGetPage + this.props.errorMessageUpdatePage + this.props.errorMessageGenerateCode
+          this.props.errorMessageGetPage + this.props.errorMessageUpdatePage + this.props.errorMessageGeneratePageCode
         }
         onHideError={this.onHideError}
         page={this.state.page}
@@ -111,9 +113,9 @@ const mapStateToProps = (state: RootState) => {
     loadingUpdatePage,
     hasErrorUpdatePage,
     errorMessageUpdatePage,
-    loadingGenerateCode,
-    hasErrorGenerateCode,
-    errorMessageGenerateCode,
+    loadingGeneratePageCode,
+    hasErrorGeneratePageCode,
+    errorMessageGeneratePageCode,
   } = state.pages;
   return {
     pages,
@@ -123,9 +125,9 @@ const mapStateToProps = (state: RootState) => {
     loadingUpdatePage,
     hasErrorUpdatePage,
     errorMessageUpdatePage,
-    loadingGenerateCode,
-    hasErrorGenerateCode,
-    errorMessageGenerateCode,
+    loadingGeneratePageCode,
+    hasErrorGeneratePageCode,
+    errorMessageGeneratePageCode,
   };
 };
 
@@ -137,9 +139,9 @@ const mapDispatch = {
   // updatePage - function
   updatePage,
   hideUpdatePageError,
-  // generateCode - function
-  generateCode,
-  hideGenerateCodeError,
+  // generatePageCode - function
+  generatePageCode,
+  hideGeneratePageCodeError,
 };
 
 const connector = connect(mapStateToProps, mapDispatch);

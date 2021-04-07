@@ -1,6 +1,7 @@
 import axios from 'axios';
 import fileDownload from 'js-file-download';
 import { createAction } from 'redux-actions';
+import { compress, decompress } from '../../utils/compressor';
 import { getErrMsg } from '../../utils/err';
 import { PagesState } from './pages.types';
 import { AppThunk } from '../store';
@@ -33,11 +34,11 @@ export const PAGES = {
   FINISH_LOADING_UPDATE_PAGE: 'finish_loading_update_page',
   SET_UPDATE_PAGE_ERROR: 'set_update_page_error',
   HIDE_UPDATE_PAGE_ERROR: 'hide_update_page_error',
-  // generateCode
-  START_LOADING_GENERATE_CODE: 'start_loading_generate_code',
-  FINISH_LOADING_GENERATE_CODE: 'finish_loading_generate_code',
-  SET_GENERATE_CODE_ERROR: 'set_generate_code_error',
-  HIDE_GENERATE_CODE_ERROR: 'hide_generate_code_error',
+  // generatePageCode
+  START_LOADING_GENERATE_PAGE_CODE: 'start_loading_generate_page_code',
+  FINISH_LOADING_GENERATE_PAGE_CODE: 'finish_loading_generate_page_code',
+  SET_GENERATE_PAGE_CODE_ERROR: 'set_generate_page_code_error',
+  HIDE_GENERATE_PAGE_CODE_ERROR: 'hide_generate_page_code_error',
 };
 
 export const setPages = createAction<Partial<PagesState>>(PAGES.SET);
@@ -58,7 +59,8 @@ export function getPages(
     return axios
       .get(`/projects/${projectId}/pages`)
       .then((res) => res.data)
-      .then(({ pages }) => {
+      .then((data) => {
+        const pages = data.pages.map((p: any) => ({ ...p, json: decompress(p.compressedState) }));
         dispatch(finishLoadingGetPages());
         onSuccess(pages);
       })
@@ -87,7 +89,8 @@ export function getPage(
     return axios
       .get(`/pages/${id}`)
       .then((res) => res.data)
-      .then(({ page }) => {
+      .then((data) => {
+        const page = { ...data.page, json: decompress(data.page.compressedState) };
         dispatch(finishLoadingGetPage());
         onSuccess(page);
       })
@@ -116,7 +119,8 @@ export function createPage(
     return axios
       .post(`/projects/${projectId}/pages/create`, { name })
       .then((res) => res.data)
-      .then(({ page }) => {
+      .then((data) => {
+        const page = { ...data.page, json: decompress(data.page.compressedState) };
         dispatch(finishLoadingCreatePage());
         onSuccess(page);
       })
@@ -145,7 +149,8 @@ export function deletePage(
     return axios
       .post(`pages/${pageId}/delete`)
       .then((res) => res.data)
-      .then(({ page }) => {
+      .then((data) => {
+        const page = { ...data.page, json: decompress(data.page.compressedState) };
         dispatch(finishLoadingDeletePage());
         onSuccess(page);
       })
@@ -171,12 +176,14 @@ export function updatePage(
 ): AppThunk<Promise<void>> {
   return (dispatch) => {
     dispatch(startLoadingUpdatePage());
+    const compressedPage = { ...page, compressedState: compress(page.json) };
     return axios
-      .post(`pages/${page.id}/update`, page)
+      .post(`pages/${page.id}/update`, { page: compressedPage })
       .then((res) => res.data)
       .then((data) => {
+        const updatedPage = { ...data.page, json: decompress(data.page.compressedState) };
         dispatch(finishLoadingUpdatePage());
-        onSuccess(data.page);
+        onSuccess(updatedPage);
       })
       .catch((err) => {
         const errMsg = getErrMsg(err.response.data);
@@ -187,13 +194,13 @@ export function updatePage(
   };
 }
 
-// generateCode - function
-export const startLoadingGenerateCode = createAction(PAGES.START_LOADING_GENERATE_CODE);
-export const finishLoadingGenerateCode = createAction(PAGES.FINISH_LOADING_GENERATE_CODE);
-export const setGenerateCodeError = createAction(PAGES.SET_GENERATE_CODE_ERROR);
-export const hideGenerateCodeError = createAction(PAGES.HIDE_GENERATE_CODE_ERROR);
+// generatePageCode - function
+export const startLoadingGeneratePageCode = createAction(PAGES.START_LOADING_GENERATE_PAGE_CODE);
+export const finishLoadingGeneratePageCode = createAction(PAGES.FINISH_LOADING_GENERATE_PAGE_CODE);
+export const setGeneratePageCodeError = createAction(PAGES.SET_GENERATE_PAGE_CODE_ERROR);
+export const hideGeneratePageCodeError = createAction(PAGES.HIDE_GENERATE_PAGE_CODE_ERROR);
 
-export function generateCode(
+export function generatePageCode(
   {
     projectId,
     page,
@@ -207,18 +214,18 @@ export function generateCode(
   onError: (errMsg: string) => void = () => {},
 ): AppThunk<Promise<void>> {
   return (dispatch) => {
-    dispatch(startLoadingGenerateCode());
+    dispatch(startLoadingGeneratePageCode());
     return axios
       .post('pages/generateCode', { page, components }, { responseType: 'blob' })
       .then((res) => {
-        dispatch(finishLoadingGenerateCode());
+        dispatch(finishLoadingGeneratePageCode());
         fileDownload(res.data, `Proj${projectId} - ${page.name}.zip`);
         onSuccess();
       })
       .catch((err) => {
         const errMsg = getErrMsg(err.response.data);
-        dispatch(finishLoadingGenerateCode());
-        dispatch(setGenerateCodeError(errMsg));
+        dispatch(finishLoadingGeneratePageCode());
+        dispatch(setGeneratePageCodeError(errMsg));
         onError(errMsg);
       });
   };

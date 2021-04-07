@@ -25,7 +25,7 @@ function PageEditor(props: PageEditorProps) {
       {props.page.id > 0 && (
         <UiEditor
           pageName={props.page.name}
-          compressedState={props.page.compressedState}
+          json={props.page.json}
           onPressSave={props.onPressSave}
           onPressGenerateCode={props.onPressGenerateCode}
         />

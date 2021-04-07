@@ -32,7 +32,7 @@ function getNestedNode(nodes: Record<string, Node>, nodeKey: string): NestedNode
 }
 
 const PAGE_TEMPLATE = `import React from 'react';
-import { {{componentNames}} } from '../components';
+import { {{componentNames}} } from '../common';
 
 export default function {{pageName}}() {
   return (
@@ -85,7 +85,7 @@ const NESTED_PROP_TEMPLATE = `{{#if isBasicProp}}
 {{/unless}}
 `;
 
-export function createPage(nodes: { [key: string]: Node }): string {
+export function generatePage(nodes: { [key: string]: Node }): string {
   const nestedNode = getNestedNode(nodes, 'ROOT');
   const view = {
     pageName: 'Page',

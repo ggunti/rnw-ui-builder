@@ -1,4 +1,5 @@
 import axios from 'axios';
+import fileDownload from 'js-file-download';
 import { createAction } from 'redux-actions';
 import { getErrMsg } from '../../utils/err';
 import { ProjectsState } from './projects.types';
@@ -17,6 +18,11 @@ export const PROJECTS = {
   FINISH_LOADING_CREATE_PROJECT: 'finish_loading_create_project',
   SET_CREATE_PROJECT_ERROR: 'set_create_project_error',
   HIDE_CREATE_PROJECT_ERROR: 'hide_create_project_error',
+  // generateProjectCode
+  START_LOADING_GENERATE_PROJECT_CODE: 'start_loading_generate_project_code',
+  FINISH_LOADING_GENERATE_PROJECT_CODE: 'finish_loading_generate_project_code',
+  SET_GENERATE_PROJECT_CODE_ERROR: 'set_generate_project_code_error',
+  HIDE_GENERATE_PROJECT_CODE_ERROR: 'hide_generate_project_code_error',
 };
 
 export const setProjects = createAction<Partial<ProjectsState>>(PROJECTS.SET);
@@ -73,6 +79,41 @@ export function createProject(
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingCreateProject());
         dispatch(setCreateProjectError(errMsg));
+        onError(errMsg);
+      });
+  };
+}
+
+// generateProjectCode - function
+export const startLoadingGenerateProjectCode = createAction(PROJECTS.START_LOADING_GENERATE_PROJECT_CODE);
+export const finishLoadingGenerateProjectCode = createAction(PROJECTS.FINISH_LOADING_GENERATE_PROJECT_CODE);
+export const setGenerateProjectCodeError = createAction(PROJECTS.SET_GENERATE_PROJECT_CODE_ERROR);
+export const hideGenerateProjectCodeError = createAction(PROJECTS.HIDE_GENERATE_PROJECT_CODE_ERROR);
+
+export function generateProjectCode(
+  {
+    project,
+    components,
+  }: {
+    project: { id: number; pages: { id: number; name: string; content: string }[] };
+    components: { name: string; content: string }[];
+  },
+  onSuccess: () => void = () => {},
+  onError: (errMsg: string) => void = () => {},
+): AppThunk<Promise<void>> {
+  return (dispatch) => {
+    dispatch(startLoadingGenerateProjectCode());
+    return axios
+      .post('/projects/generateCode', { project, components }, { responseType: 'blob' })
+      .then((res) => {
+        dispatch(finishLoadingGenerateProjectCode());
+        fileDownload(res.data, `Proj${project.id}.zip`);
+        onSuccess();
+      })
+      .catch((err) => {
+        const errMsg = getErrMsg(err.response.data);
+        dispatch(finishLoadingGenerateProjectCode());
+        dispatch(setGenerateProjectCodeError(errMsg));
         onError(errMsg);
       });
   };

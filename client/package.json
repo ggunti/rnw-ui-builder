@@ -9,6 +9,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
+    "typescript": "tsc",
     "build:web": "cd web && cross-env NODE_ENV=production webpack --env production"
   },
   "dependencies": {

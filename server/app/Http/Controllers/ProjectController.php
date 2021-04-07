@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use ZipArchive;
 
 class ProjectController extends Controller
 {
@@ -30,5 +31,32 @@ class ProjectController extends Controller
         $projects = auth()->user()->projects;
 
         return response()->json(['projects' => $projects]);
+    }
+
+    public function generateCode(Request $request)
+    {
+        $project = $request->input('project');
+        $components = $request->input('components');
+        if (Project::find($project['id'])->userId !== auth()->user()->id) {
+            return response()->json(['message' => 'Unauthorized. You do not own this project!'], 401);
+        }
+        $fileName = 'Proj' . $project['id'] . '.zip';
+        $zip = new ZipArchive();
+        if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE) {
+            // add project pages to 'src/' directory
+            collect($project['pages'])->each(function ($page, $key) use ($zip) {
+                $zip->addFromString('src/' . $page['name'] . '/' . $page['name'] . '.js', $page['content']);
+            });
+            // add components to 'common/' directory
+            collect($components)->each(function ($comp, $key) use ($zip) {
+                $zip->addFromString('src/common/' . $comp['name'] . '.js', $comp['content']);
+            });
+            // add 'common/index.js' file
+            $index = view('templates.common.index', ['components' => $components]);
+            $zip->addFromString('src/common/index.js', $index);
+            $zip->close();
+        }
+
+        return response()->download(public_path($fileName))->deleteFileAfterSend(true);
     }
 }

@@ -20,7 +20,7 @@ function PagePreview(props: PagePreviewProps) {
       onHideError={props.onHideError}
     >
       {/* if we do not make this check, then default UI components are shown instead of loaded ones (because of some kind of internal caching of craftjs) */}
-      {props.page.id > 0 && <UiEditor preview compressedState={props.page.compressedState} />}
+      {props.page.id > 0 && <UiEditor preview json={props.page.json} />}
     </Layout>
   );
 }

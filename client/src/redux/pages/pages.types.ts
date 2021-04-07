@@ -22,8 +22,8 @@ export interface PagesState {
   loadingUpdatePage: boolean;
   hasErrorUpdatePage: boolean;
   errorMessageUpdatePage: string;
-  // generateCode
-  loadingGenerateCode: boolean;
-  hasErrorGenerateCode: boolean;
-  errorMessageGenerateCode: string;
+  // generatePageCode
+  loadingGeneratePageCode: boolean;
+  hasErrorGeneratePageCode: boolean;
+  errorMessageGeneratePageCode: string;
 }

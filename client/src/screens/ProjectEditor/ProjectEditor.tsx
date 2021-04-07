@@ -23,6 +23,7 @@ interface ProjectEditorProps {
   setNewPageName: (newPageName: string) => void;
   addDisabled: boolean;
   onAddNewPage: () => void;
+  onPressGenerate: () => void;
   onPressDeletePage: (id: number) => void;
   onPressPage: (id: number) => void;
 }
@@ -35,9 +36,17 @@ function ProjectEditor(props: ProjectEditorProps) {
       errorMessage={props.errorMessage}
       onHideError={props.onHideError}
     >
-      <Button type='outline' title='Add new page' onPress={() => props.setModalVisible(true)} />
+      <View style={styles.row}>
+        <Button
+          containerStyle={{ flex: 1 }}
+          type='outline'
+          title='Add new page'
+          onPress={() => props.setModalVisible(true)}
+        />
+        <Button containerStyle={{ flex: 1 }} title='Generate project code' onPress={props.onPressGenerate} />
+      </View>
       <View style={styles.container}>
-        {_.map(props.pages, ({ id, name, compressedState }) => (
+        {_.map(props.pages, ({ id, name, json }) => (
           <View key={id.toString()} style={styles.pageContainer}>
             <View style={styles.headerContainer}>
               <Text style={styles.title}>{name}</Text>
@@ -50,7 +59,7 @@ function ProjectEditor(props: ProjectEditorProps) {
             >
               <View style={styles.editorContainer}>
                 {props.hoveredPageId === id ? (
-                  <UiEditor preview={true} compressedState={compressedState} />
+                  <UiEditor preview={true} json={json} />
                 ) : (
                   <Text style={styles.title}>Hover to preview</Text>
                 )}
@@ -72,6 +81,10 @@ function ProjectEditor(props: ProjectEditorProps) {
 export default ProjectEditor;
 
 const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   container: {
     flexDirection: 'row',
     flexWrap: 'wrap',

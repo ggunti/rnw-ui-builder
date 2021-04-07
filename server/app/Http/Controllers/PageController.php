@@ -91,20 +91,18 @@ class PageController extends Controller
         if (Page::find($page['id'])->project->userId !== auth()->user()->id) {
             return response()->json(['message' => 'Unauthorized. You do not own this project!'], 401);
         }
-        $fileName = $page['name'] . '.zip';
+        $fileName = 'Page' . $page['id'] . '.zip';
         $zip = new ZipArchive();
         if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE) {
-            // add page main file
-            $zip->addFromString($page['name'] . '/' . $page['name'] . '.js', $page['content']);
-            // add components to 'components/' directory
+            // add page main file (ex. 'Home/Home.js')
+            $zip->addFromString('src/' . $page['name'] . '/' . $page['name'] . '.js', $page['content']);
+            // add components to 'common/' directory
             collect($components)->each(function ($comp, $key) use ($zip) {
-                $zip->addFromString('components/' . $comp['name'] . '.js', $comp['content']);
+                $zip->addFromString('src/common/' . $comp['name'] . '.js', $comp['content']);
             });
-            // add 'components/index.js' file
-            $index = collect($components)->map(function($comp, $key) {
-                return "export * from './" . $comp['name'] . "';";
-            })->join("\r\n");
-            $zip->addFromString('components/index.js', $index);
+            // add 'common/index.js' file
+            $index = view('templates.common.index', ['components' => $components]);
+            $zip->addFromString('src/common/index.js', $index);
             $zip->close();
         }
 

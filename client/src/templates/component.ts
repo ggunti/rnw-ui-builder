@@ -9,7 +9,7 @@ export function getComponentNames(nodes: { [key: string]: Node }) {
   return Array.from(uniqueNodeNames);
 }
 
-export function createComponent(content: string) {
+export function generateComponent(content: string) {
   const template = Handlebars.compile(content);
   return template() as string;
 }

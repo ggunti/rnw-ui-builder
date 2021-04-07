@@ -23,10 +23,10 @@ const INITIAL_STATE: PagesState = {
   loadingUpdatePage: false,
   hasErrorUpdatePage: false,
   errorMessageUpdatePage: '',
-  // generateCode
-  loadingGenerateCode: false,
-  hasErrorGenerateCode: false,
-  errorMessageGenerateCode: '',
+  // generatePageCode
+  loadingGeneratePageCode: false,
+  hasErrorGeneratePageCode: false,
+  errorMessageGeneratePageCode: '',
 };
 
 export default (state = INITIAL_STATE, action: any): PagesState => {
@@ -78,15 +78,15 @@ export default (state = INITIAL_STATE, action: any): PagesState => {
       return { ...state, hasErrorUpdatePage: true, errorMessageUpdatePage: action.payload };
     case PAGES.HIDE_UPDATE_PAGE_ERROR:
       return { ...state, hasErrorUpdatePage: false, errorMessageUpdatePage: '' };
-    // generateCode
-    case PAGES.START_LOADING_GENERATE_CODE:
-      return { ...state, loadingGenerateCode: true };
-    case PAGES.FINISH_LOADING_GENERATE_CODE:
-      return { ...state, loadingGenerateCode: false };
-    case PAGES.SET_GENERATE_CODE_ERROR:
-      return { ...state, hasErrorGenerateCode: true, errorMessageGenerateCode: action.payload };
-    case PAGES.HIDE_GENERATE_CODE_ERROR:
-      return { ...state, hasErrorGenerateCode: false, errorMessageGenerateCode: '' };
+    // generatePageCode
+    case PAGES.START_LOADING_GENERATE_PAGE_CODE:
+      return { ...state, loadingGeneratePageCode: true };
+    case PAGES.FINISH_LOADING_GENERATE_PAGE_CODE:
+      return { ...state, loadingGeneratePageCode: false };
+    case PAGES.SET_GENERATE_PAGE_CODE_ERROR:
+      return { ...state, hasErrorGeneratePageCode: true, errorMessageGeneratePageCode: action.payload };
+    case PAGES.HIDE_GENERATE_PAGE_CODE_ERROR:
+      return { ...state, hasErrorGeneratePageCode: false, errorMessageGeneratePageCode: '' };
     default:
       return state;
   }

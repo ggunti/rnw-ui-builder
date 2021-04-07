@@ -36,11 +36,11 @@ $router->post('/verifyToken', [AuthController::class, 'verifyToken']);
 
 $router->get('/projects', [ProjectController::class, 'get']);
 $router->post('/projects/create', [ProjectController::class, 'create']);
+$router->post('/projects/generateCode', [ProjectController::class, 'generateCode']);
 
 $router->get('/projects/{projectId}/pages', [PageController::class, 'getAll']);
 $router->get('/pages/{id}', [PageController::class, 'get']);
 $router->post('/projects/{projectId}/pages/create', [PageController::class, 'create']);
 $router->post('/pages/{pageId}/delete', [PageController::class, 'delete']);
 $router->post('/pages/{pageId}/update', [PageController::class, 'update']);
-
 $router->post('/pages/generateCode', [PageController::class, 'generateCode']);

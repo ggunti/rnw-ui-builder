@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { connect, ConnectedProps } from 'react-redux';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import ProjectEditor from './ProjectEditor';
+import { generatePage } from '../../templates/page';
+import { generateComponent } from '../../templates/component';
+import { userComponents } from '../../UiEditor/user';
 import {
   // pages - entity
   setPages,
@@ -15,6 +19,9 @@ import {
   // deletePage - function
   deletePage,
   hideDeletePageError,
+  // generateProjectCode
+  generateProjectCode,
+  hideGenerateProjectCodeError,
 } from '../../redux/actions';
 import { RootState } from '../../redux/store';
 import { StackParamList, PageType } from '../../types';
@@ -57,6 +64,27 @@ class ProjectEditorPage extends Component<ProjectEditorPageProps, ProjectEditorP
     this.setState({ modalVisible: false, newPageName: '' });
   };
 
+  onPressGenerate = () => {
+    const componentNames = new Set<string>();
+    const pages = this.props.pages.map((p) => {
+      if (p.json) {
+        const nodes = JSON.parse(p.json);
+        _.forEach(nodes, (val) => componentNames.add(val.type.resolvedName));
+        return { ...p, content: generatePage(nodes) };
+      }
+      return { ...p, content: '' };
+    });
+    const components = Array.from(componentNames).map((name) => ({
+      name,
+      // @ts-ignore
+      content: generateComponent(userComponents[name].template),
+    }));
+
+    const onSuccess = () => {};
+    const onError = () => {};
+    this.props.generateProjectCode({ project: { id: this.projectId, pages }, components }, onSuccess, onError);
+  };
+
   onPressDeletePage = (id: number) => {
     const onSuccess = () => {
       const pages = this.props.pages.filter((p) => p.id !== id);
@@ -76,15 +104,29 @@ class ProjectEditorPage extends Component<ProjectEditorPageProps, ProjectEditorP
     this.props.hideGetPagesError();
     this.props.hideCreatePageError();
     this.props.hideDeletePageError();
+    this.props.hideGenerateProjectCodeError();
   };
 
   render() {
     return (
       <ProjectEditor
-        loading={this.props.loadingGetPages || this.props.loadingCreatePage || this.props.loadingDeletePage}
-        hasError={this.props.hasErrorGetPages || this.props.hasErrorCreatePage || this.props.hasErrorDeletePage}
+        loading={
+          this.props.loadingGetPages ||
+          this.props.loadingCreatePage ||
+          this.props.loadingDeletePage ||
+          this.props.loadingGenerateProjectCode
+        }
+        hasError={
+          this.props.hasErrorGetPages ||
+          this.props.hasErrorCreatePage ||
+          this.props.hasErrorDeletePage ||
+          this.props.hasErrorGenerateProjectCode
+        }
         errorMessage={
-          this.props.errorMessageGetPages + this.props.errorMessageCreatePage + this.props.errorMessageDeletePage
+          this.props.errorMessageGetPages +
+          this.props.errorMessageCreatePage +
+          this.props.errorMessageDeletePage +
+          this.props.errorMessageGenerateProjectCode
         }
         onHideError={this.onHideError}
         pages={this.props.pages}
@@ -96,6 +138,7 @@ class ProjectEditorPage extends Component<ProjectEditorPageProps, ProjectEditorP
         setNewPageName={(newPageName) => this.setState({ newPageName })}
         addDisabled={this.state.newPageName.length === 0}
         onAddNewPage={this.onAddNewPage}
+        onPressGenerate={this.onPressGenerate}
         onPressDeletePage={this.onPressDeletePage}
         onPressPage={this.onPressPage}
       />
@@ -116,6 +159,7 @@ const mapStateToProps = (state: RootState) => {
     hasErrorDeletePage,
     errorMessageDeletePage,
   } = state.pages;
+  const { loadingGenerateProjectCode, hasErrorGenerateProjectCode, errorMessageGenerateProjectCode } = state.projects;
   return {
     pages,
     loadingGetPages,
@@ -127,6 +171,9 @@ const mapStateToProps = (state: RootState) => {
     loadingDeletePage,
     hasErrorDeletePage,
     errorMessageDeletePage,
+    loadingGenerateProjectCode,
+    hasErrorGenerateProjectCode,
+    errorMessageGenerateProjectCode,
   };
 };
 
@@ -142,6 +189,9 @@ const mapDispatch = {
   // deletePage - function
   deletePage,
   hideDeletePageError,
+  // generateProjectCode
+  generateProjectCode,
+  hideGenerateProjectCodeError,
 };
 
 const connector = connect(mapStateToProps, mapDispatch);
