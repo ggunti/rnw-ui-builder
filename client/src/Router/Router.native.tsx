@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { connect, ConnectedProps } from 'react-redux';
@@ -15,22 +16,32 @@ type RouterPropsFromRedux = ConnectedProps<typeof connector>;
 
 interface RouterProps extends RouterPropsFromRedux {}
 
-function Router(props: RouterProps) {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        {props.signedIn ? (
-          <>
-            <Stack.Screen name='projects' options={{ title: 'Projects' }} component={ProjectsPage} />
-            <Stack.Screen name='projectPreview' options={{ title: 'Project preview' }} component={ProjectPreviewPage} />
-            <Stack.Screen name='pagePreview' options={{ title: 'Page preview' }} component={PagePreviewPage} />
-          </>
-        ) : (
-          <Stack.Screen name='login' options={{ title: 'Login' }} component={LoginPage} />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+class Router extends Component<RouterProps> {
+  componentDidMount() {
+    SplashScreen.hide();
+  }
+
+  render() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          {this.props.signedIn ? (
+            <>
+              <Stack.Screen name='projects' options={{ title: 'Projects' }} component={ProjectsPage} />
+              <Stack.Screen
+                name='projectPreview'
+                options={{ title: 'Project preview' }}
+                component={ProjectPreviewPage}
+              />
+              <Stack.Screen name='pagePreview' options={{ title: 'Page preview' }} component={PagePreviewPage} />
+            </>
+          ) : (
+            <Stack.Screen name='login' options={{ title: 'Login' }} component={LoginPage} />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
 
 const mapStateToProps = (state: RootState) => {

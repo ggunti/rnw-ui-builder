@@ -194,7 +194,6 @@
 				D4BC34A07F2140F954D90D00 /* Pods-appBuilder-tvOSTests.debug.xcconfig */,
 				2164D96D7E73C1F8C7B655E3 /* Pods-appBuilder-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
