@@ -1,4 +1,4 @@
-package com.appbuilder;
+package com.rnw_app_builder;
 
 import android.os.Bundle; // react-native-splash-screen
 import com.facebook.react.ReactActivity;
