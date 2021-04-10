@@ -3,3 +3,4 @@ export * from './SettingsPanel';
 export * from './Topbar';
 export * from './UiPreview';
 export * from './RenderNode';
+export * from './Renderer';

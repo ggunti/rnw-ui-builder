@@ -3,10 +3,10 @@ import { View, Platform } from 'react-native';
 import { Input as RNInput } from 'react-native-elements';
 import { useNode } from '@craftjs/core';
 import _ from 'lodash';
-import { Renderer } from '../common';
+import { Renderer } from '../UiEditor';
 import { layoutProps, viewStyleProps, textStyleProps } from '../constants';
-import { getActualProps } from '../../utils/helpers';
-import { Prop } from '../../types';
+import { getActualProps } from '../utils/helpers';
+import { Prop } from '../types';
 
 const defaultInputProps: Record<string, Prop> = {
   placeholder: {
@@ -231,7 +231,7 @@ export function Input(props: Record<string, Prop>) {
 Input.craft = {
   props: _.cloneDeep(defaultInputProps),
   related: {
-    uiSettings: Renderer,
+    uiSettings: () => <Renderer />,
   },
 };
 

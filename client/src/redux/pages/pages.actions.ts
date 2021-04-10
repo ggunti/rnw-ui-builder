@@ -177,8 +177,9 @@ export function updatePage(
   return (dispatch) => {
     dispatch(startLoadingUpdatePage());
     const compressedPage = { ...page, compressedState: compress(page.json) };
+    delete compressedPage.json;
     return axios
-      .post(`pages/${page.id}/update`, { page: compressedPage })
+      .post(`pages/${page.id}/update`, compressedPage)
       .then((res) => res.data)
       .then((data) => {
         const updatedPage = { ...data.page, json: decompress(data.page.compressedState) };

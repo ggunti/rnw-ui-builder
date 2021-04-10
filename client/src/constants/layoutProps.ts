@@ -1,4 +1,4 @@
-import { Prop } from '../../types';
+import { Prop } from '../types';
 
 export const layoutProps: Record<string, Prop> = {
   alignContent: {

@@ -3,10 +3,10 @@ import { View, Platform } from 'react-native';
 import { Button as RNButton } from 'react-native-elements';
 import { useNode } from '@craftjs/core';
 import _ from 'lodash';
-import { Renderer } from '../common';
+import { Renderer } from '../UiEditor';
 import { layoutProps, viewStyleProps, textStyleProps } from '../constants';
-import { getActualProps } from '../../utils/helpers';
-import { Prop } from '../../types';
+import { getActualProps } from '../utils/helpers';
+import { Prop } from '../types';
 
 const defaultButtonProps: Record<string, Prop> = {
   title: {
@@ -219,7 +219,7 @@ export function Button(props: Record<string, Prop>) {
 Button.craft = {
   props: _.cloneDeep(defaultButtonProps),
   related: {
-    uiSettings: Renderer,
+    uiSettings: () => <Renderer />,
   },
 };
 

@@ -1,6 +1,8 @@
 import React from 'react';
+import { Editor, Frame, Element } from '@craftjs/core';
 import { Layout } from '../../common';
-import UiEditor from '../../UiEditor/UiEditor';
+import { RenderNode } from '../../UiEditor';
+import { draggableComponents, Container } from '../../draggables';
 import { PageType } from '../../types';
 
 interface PagePreviewProps {
@@ -20,7 +22,13 @@ function PagePreview(props: PagePreviewProps) {
       onHideError={props.onHideError}
     >
       {/* if we do not make this check, then default UI components are shown instead of loaded ones (because of some kind of internal caching of craftjs) */}
-      {props.page.id > 0 && <UiEditor preview json={props.page.json} />}
+      {props.page.id > 0 && (
+        <Editor enabled={false} resolver={draggableComponents} onRender={RenderNode}>
+          <Frame data={props.page.json}>
+            <Element is={Container} canvas />
+          </Frame>
+        </Editor>
+      )}
     </Layout>
   );
 }

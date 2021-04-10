@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Platform } from 'react-native';
 import { useNode } from '@craftjs/core';
 import _ from 'lodash';
-import { Renderer } from '../common';
+import { Renderer } from '../UiEditor';
 import { layoutProps, viewStyleProps } from '../constants';
-import { getActualProps } from '../../utils/helpers';
-import { Prop } from '../../types';
+import { getActualProps } from '../utils/helpers';
+import { Prop } from '../types';
 
 const defaultContainerProps: Record<string, Prop> = {
   style: {
@@ -39,7 +39,7 @@ export function Container(props: any) {
 Container.craft = {
   props: _.cloneDeep(defaultContainerProps),
   related: {
-    uiSettings: Renderer,
+    uiSettings: () => <Renderer />,
   },
 };
 

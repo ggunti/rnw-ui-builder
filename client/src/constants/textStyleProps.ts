@@ -1,4 +1,4 @@
-import { Prop } from '../../types';
+import { Prop } from '../types';
 
 export const textStyleProps: Record<string, Prop> = {
   color: {

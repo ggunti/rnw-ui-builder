@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useEditor, Frame, Element } from '@craftjs/core';
-import { Container, Button, Text } from '../user';
+import { Container } from '../draggables';
 
 interface UiPreviewProps {
   json?: string;
@@ -14,10 +14,7 @@ export function UiPreview({ json, phoneWidth }: UiPreviewProps) {
     <View ref={(ref) => connectors.select(connectors.hover(ref as any, null), null)} style={styles.container}>
       <View style={[styles.phoneContainer, { width: phoneWidth }]}>
         <Frame data={json}>
-          <Element is={Container} canvas>
-            <Button />
-            <Text />
-          </Element>
+          <Element is={Container} canvas />
         </Frame>
       </View>
     </View>

@@ -5,7 +5,8 @@ import { RouteProp } from '@react-navigation/native';
 import PageEditor from './PageEditor';
 import { generatePage } from '../../templates/page';
 import { generateComponent, getComponentNames } from '../../templates/component';
-import { userComponents } from '../../UiEditor/user';
+import { draggableComponents } from '../../draggables';
+import { PHONE_WIDTHS } from '../../constants';
 import {
   // pages - entity
   setPages,
@@ -31,6 +32,7 @@ interface PageEditorPageProps extends PropsFromRedux {
 
 interface PageEditorPageState {
   page: PageType;
+  phoneWidth: number;
 }
 
 class PageEditorPage extends Component<PageEditorPageProps, PageEditorPageState> {
@@ -42,6 +44,7 @@ class PageEditorPage extends Component<PageEditorPageProps, PageEditorPageState>
       projectId: -1,
       name: '',
     },
+    phoneWidth: PHONE_WIDTHS[0].value,
   };
 
   componentDidMount() {
@@ -73,7 +76,7 @@ class PageEditorPage extends Component<PageEditorPageProps, PageEditorPageState>
     const components = componentNames.map((name) => ({
       name,
       // @ts-ignore
-      content: generateComponent(userComponents[name].template),
+      content: generateComponent(draggableComponents[name].template),
     }));
 
     const onSuccess = () => {};
@@ -97,6 +100,8 @@ class PageEditorPage extends Component<PageEditorPageProps, PageEditorPageState>
         }
         onHideError={this.onHideError}
         page={this.state.page}
+        phoneWidth={this.state.phoneWidth}
+        setPhoneWidth={(phoneWidth) => this.setState({ phoneWidth })}
         onPressSave={this.onPressSave}
         onPressGenerateCode={this.onPressGenerateCode}
       />

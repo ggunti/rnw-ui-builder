@@ -2,7 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Text as RNText, Icon } from 'react-native-elements';
 import { Element, useEditor } from '@craftjs/core';
-import { Container, Text, Button, Input } from '../user';
+import { Container, Text, Button, Input } from '../draggables';
 
 interface ToolboxElementProps {
   title: string;

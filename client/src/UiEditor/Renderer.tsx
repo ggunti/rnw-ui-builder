@@ -2,11 +2,9 @@ import React, { CSSProperties } from 'react';
 import { Input, Slider, CheckBox } from 'react-native-elements';
 import { useNode } from '@craftjs/core';
 import _ from 'lodash';
-import { ColorPicker } from './ColorPicker';
-import { Dropdown } from './Dropdown';
-import { Expandable } from './Expandable';
-import { isBasicProp } from '../../utils/helpers';
-import { BasicProp, NestedProp, Prop } from '../../types';
+import { ColorPicker, Dropdown, Expandable } from '../common';
+import { isBasicProp } from '../utils/helpers';
+import { BasicProp, NestedProp, Prop } from '../types';
 
 function RenderBasicProp({ pKey, prop }: { pKey: string; prop: BasicProp }) {
   const {

@@ -6,7 +6,7 @@ import { RouteProp } from '@react-navigation/native';
 import ProjectEditor from './ProjectEditor';
 import { generatePage } from '../../templates/page';
 import { generateComponent } from '../../templates/component';
-import { userComponents } from '../../UiEditor/user';
+import { draggableComponents } from '../../draggables';
 import {
   // pages - entity
   setPages,
@@ -77,7 +77,7 @@ class ProjectEditorPage extends Component<ProjectEditorPageProps, ProjectEditorP
     const components = Array.from(componentNames).map((name) => ({
       name,
       // @ts-ignore
-      content: generateComponent(userComponents[name].template),
+      content: generateComponent(draggableComponents[name].template),
     }));
 
     const onSuccess = () => {};

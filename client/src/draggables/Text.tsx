@@ -3,10 +3,10 @@ import { TouchableOpacity, Platform } from 'react-native';
 import { Text as RNText } from 'react-native-elements';
 import { useNode } from '@craftjs/core';
 import _ from 'lodash';
-import { Renderer } from '../common';
+import { Renderer } from '../UiEditor';
 import { layoutProps, textStyleProps, viewStyleProps } from '../constants';
-import { getActualProps } from '../../utils/helpers';
-import { Prop } from '../../types';
+import { getActualProps } from '../utils/helpers';
+import { Prop } from '../types';
 
 const defaultTextProps: Record<string, Prop> = {
   text: {
@@ -63,7 +63,7 @@ export function Text(props: Record<string, Prop>) {
 Text.craft = {
   props: _.cloneDeep(defaultTextProps),
   related: {
-    uiSettings: Renderer,
+    uiSettings: () => <Renderer />,
   },
 };
 

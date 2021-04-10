@@ -8,4 +8,4 @@ import { Text } from './Text';
 import { Button } from './Button';
 import { Input } from './Input';
 
-export const userComponents: Record<string, React.ElementType> = { Container, Text, Button, Input };
+export const draggableComponents: Record<string, React.ElementType> = { Container, Text, Button, Input };

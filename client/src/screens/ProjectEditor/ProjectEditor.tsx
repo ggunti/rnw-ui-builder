@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, TouchableOpacity, Platform, StyleSheet } from 'react-native';
-import { Overlay, Button, Input, Text } from 'react-native-elements';
+import { Overlay, Input, Button, Text } from 'react-native-elements';
+import { Editor, Frame, Element } from '@craftjs/core';
 import _ from 'lodash';
 import { Layout } from '../../common';
-import UiEditor from '../../UiEditor/UiEditor';
+import { RenderNode } from '../../UiEditor';
+import { draggableComponents, Container } from '../../draggables';
 import { PageType } from '../../types';
 
 const PAGE_WIDTH = 200;
@@ -59,7 +61,11 @@ function ProjectEditor(props: ProjectEditorProps) {
             >
               <View style={styles.editorContainer}>
                 {props.hoveredPageId === id ? (
-                  <UiEditor preview={true} json={json} />
+                  <Editor enabled={false} resolver={draggableComponents} onRender={RenderNode}>
+                    <Frame data={json}>
+                      <Element is={Container} canvas />
+                    </Frame>
+                  </Editor>
                 ) : (
                   <Text style={styles.title}>Hover to preview</Text>
                 )}

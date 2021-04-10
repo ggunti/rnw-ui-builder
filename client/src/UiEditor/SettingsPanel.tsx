@@ -5,7 +5,7 @@ import { useEditor } from '@craftjs/core';
 
 interface SettingsPanelProps {}
 
-const SettingsPanel: React.FC<SettingsPanelProps> = () => {
+export const SettingsPanel: React.FC<SettingsPanelProps> = () => {
   const { selected } = useEditor((state) => {
     const currentNodeId = state.events.selected;
     let selected;
@@ -54,5 +54,3 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 });
-
-export { SettingsPanel };
