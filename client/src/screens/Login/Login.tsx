@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Platform, StyleSheet } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { Layout } from '../../common';
 
@@ -30,7 +30,7 @@ export default function Login(props: LoginProps) {
             loading={props.loading}
             onPress={props.onPressLogin}
           />
-          <Button type='outline' title='Sign up' onPress={props.onPressSignup} />
+          {Platform.OS === 'web' && <Button type='outline' title='Sign up' onPress={props.onPressSignup} />}
         </View>
       </View>
     </Layout>
