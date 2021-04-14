@@ -21,7 +21,7 @@ export const RenderNode = ({ render }: { render: any }) => {
     isActive: node.events.selected,
     isHover: node.events.hovered,
     dom: node.dom,
-    name: node.data.custom.displayName || node.data.displayName,
+    name: node.data.custom.displayName || node.data.name,
     moveable: query.node(node.id).isDraggable(),
     deletable: query.node(node.id).isDeletable(),
     parent: node.data.parent,
