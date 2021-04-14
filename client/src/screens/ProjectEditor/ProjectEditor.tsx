@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, TouchableOpacity, Platform, StyleSheet } from 'react-native';
+import { View as RNView, TouchableOpacity, Platform, StyleSheet } from 'react-native';
 import { Overlay, Input, Button, Text } from 'react-native-elements';
 import { Editor, Frame, Element } from '@craftjs/core';
 import _ from 'lodash';
 import { Layout } from '../../common';
 import { RenderNode } from '../../UiEditor';
-import { draggableComponents, Container } from '../../draggables';
+import { draggableComponents, View } from '../../draggables';
 import { PageType } from '../../types';
 
 const PAGE_WIDTH = 200;
@@ -38,7 +38,7 @@ function ProjectEditor(props: ProjectEditorProps) {
       errorMessage={props.errorMessage}
       onHideError={props.onHideError}
     >
-      <View style={styles.row}>
+      <RNView style={styles.row}>
         <Button
           containerStyle={{ flex: 1 }}
           type='outline'
@@ -46,39 +46,39 @@ function ProjectEditor(props: ProjectEditorProps) {
           onPress={() => props.setModalVisible(true)}
         />
         <Button containerStyle={{ flex: 1 }} title='Generate project code' onPress={props.onPressGenerate} />
-      </View>
-      <View style={styles.container}>
+      </RNView>
+      <RNView style={styles.container}>
         {_.map(props.pages, ({ id, name, json }) => (
-          <View key={id.toString()} style={styles.pageContainer}>
-            <View style={styles.headerContainer}>
+          <RNView key={id.toString()} style={styles.pageContainer}>
+            <RNView style={styles.headerContainer}>
               <Text style={styles.title}>{name}</Text>
               <Button title='Delete' onPress={() => props.onPressDeletePage(id)} />
-            </View>
+            </RNView>
             <TouchableOpacity
               onPress={() => props.onPressPage(id)}
               // @ts-ignore
               onMouseEnter={() => props.setHoveredPageId(id)}
             >
-              <View style={styles.editorContainer}>
+              <RNView style={styles.editorContainer}>
                 {props.hoveredPageId === id ? (
                   <Editor enabled={false} resolver={draggableComponents} onRender={RenderNode}>
                     <Frame data={json}>
-                      <Element is={Container} canvas />
+                      <Element is={View} canvas />
                     </Frame>
                   </Editor>
                 ) : (
                   <Text style={styles.title}>Hover to preview</Text>
                 )}
-              </View>
+              </RNView>
             </TouchableOpacity>
-          </View>
+          </RNView>
         ))}
-      </View>
+      </RNView>
       <Overlay isVisible={props.modalVisible} onBackdropPress={() => props.setModalVisible(false)}>
-        <View>
+        <RNView>
           <Input placeholder='Page name' value={props.newPageName} onChangeText={props.setNewPageName} />
           <Button type='outline' title='Add' disabled={props.addDisabled} onPress={props.onAddNewPage} />
-        </View>
+        </RNView>
       </Overlay>
     </Layout>
   );

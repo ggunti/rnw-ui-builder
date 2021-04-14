@@ -1,7 +1,13 @@
 import _ from 'lodash';
 import { Prop, BasicProp, NestedProp } from '../types';
 
-// get the props which will be passed to the user component (Container, Text, Button, etc)
+export function sortObjectByKeys<T>(obj: Record<string, T>) {
+  return Object.keys(obj)
+    .sort()
+    .reduce<Record<string, T>>((acc, key) => ({ ...acc, [key]: obj[key] }), {});
+}
+
+// get the props which will be passed to the user component (View, Text, Button, etc)
 export function getActualProps(props: Record<string, Prop>) {
   const actualProps: Record<string, any> = {};
   const nonDefaultProps = getNonDefaultProps(props);

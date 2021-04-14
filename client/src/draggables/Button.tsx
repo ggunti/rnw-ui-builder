@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Platform } from 'react-native';
-import { Button as RNButton } from 'react-native-elements';
+import { Button as RNEButton } from 'react-native-elements';
 import { useNode } from '@craftjs/core';
 import _ from 'lodash';
 import { Renderer } from '../UiEditor';
-import { layoutProps, viewStyleProps, textStyleProps } from '../constants';
-import { getActualProps } from '../utils/helpers';
+import { layoutProps, viewStyleProps, textStyleProps, iconProps } from '../constants';
+import { getActualProps, sortObjectByKeys } from '../utils/helpers';
 import { Prop } from '../types';
 
 const defaultButtonProps: Record<string, Prop> = {
@@ -37,8 +37,8 @@ const defaultButtonProps: Record<string, Prop> = {
       ],
     },
   },
-  raised: {
-    name: 'Raised',
+  disabled: {
+    name: 'Disabled',
     optional: true,
     value: undefined,
     shownValue: false,
@@ -59,8 +59,8 @@ const defaultButtonProps: Record<string, Prop> = {
     selectorType: 'checkBox',
     selectorProps: {},
   },
-  disabled: {
-    name: 'Disabled',
+  raised: {
+    name: 'Raised',
     optional: true,
     value: undefined,
     shownValue: false,
@@ -84,66 +84,32 @@ const defaultButtonProps: Record<string, Prop> = {
   icon: {
     name: 'Icon',
     subprops: {
-      type: {
-        name: 'Type',
-        optional: true,
-        value: undefined,
-        shownValue: 'material',
-        oldValue: 'material',
-        oldShownValue: 'material',
-        renderType: 'string',
-        selectorType: 'input',
-        selectorProps: {},
-      },
-      name: {
-        name: 'Name',
-        optional: true,
-        value: undefined,
-        shownValue: 'touch-app',
-        oldValue: 'touch-app',
-        oldShownValue: 'touch-app',
-        renderType: 'string',
-        selectorType: 'input',
-        selectorProps: {},
-      },
-      color: textStyleProps.color,
-      size: {
-        name: 'Size',
-        optional: true,
-        value: undefined,
-        shownValue: 14,
-        oldValue: 14,
-        oldShownValue: 14,
-        renderType: 'number',
-        selectorType: 'slider',
-        selectorProps: {
-          step: 1,
-          minimumValue: 2,
-          maximumValue: 50,
-        },
-      },
+      name: iconProps.name,
+      type: iconProps.type,
+      size: iconProps.size,
+      color: iconProps.color,
+      containerStyle: iconProps.containerStyle,
     },
   },
   buttonStyle: {
     name: 'Button style',
-    subprops: {
-      backgroundColor: viewStyleProps.backgroundColor,
-      borderWidth: viewStyleProps.borderWidth,
-      borderColor: viewStyleProps.borderColor,
-      borderRadius: viewStyleProps.borderRadius,
-      borderStyle: viewStyleProps.borderStyle,
-      padding: layoutProps.padding,
-    },
+    subprops: sortObjectByKeys({ ...layoutProps, ...viewStyleProps }),
   },
   titleStyle: {
     name: 'Title style',
-    subprops: {
-      color: textStyleProps.color,
-      fontSize: textStyleProps.fontSize,
-      fontWeight: textStyleProps.fontWeight,
-      fontStyle: textStyleProps.fontStyle,
-      textDecorationLine: textStyleProps.textDecorationLine,
-    },
+    subprops: textStyleProps,
+  },
+  containerStyle: {
+    name: 'Container style',
+    subprops: layoutProps,
+  },
+  disabledStyle: {
+    name: 'Disabled style',
+    subprops: sortObjectByKeys({ ...layoutProps, ...viewStyleProps }),
+  },
+  disabledTitleStyle: {
+    name: 'Disabled title style',
+    subprops: textStyleProps,
   },
   loadingProps: {
     name: 'Loading props',
@@ -167,39 +133,6 @@ const defaultButtonProps: Record<string, Prop> = {
       },
     },
   },
-  disabledStyle: {
-    name: 'Disabled style',
-    subprops: {
-      backgroundColor: viewStyleProps.backgroundColor,
-      borderWidth: viewStyleProps.borderWidth,
-      borderColor: viewStyleProps.borderColor,
-      borderRadius: viewStyleProps.borderRadius,
-      borderStyle: viewStyleProps.borderStyle,
-    },
-  },
-  disabledTitleStyle: {
-    name: 'Disabled title style',
-    subprops: {
-      color: textStyleProps.color,
-      fontSize: textStyleProps.fontSize,
-      fontWeight: textStyleProps.fontWeight,
-      fontStyle: textStyleProps.fontStyle,
-      textDecorationLine: textStyleProps.textDecorationLine,
-    },
-  },
-  containerStyle: {
-    name: 'Container style',
-    subprops: {
-      flex: layoutProps.flex,
-      alignItems: layoutProps.alignItems,
-      justifyContent: layoutProps.justifyContent,
-      margin: layoutProps.margin,
-      marginTop: layoutProps.marginTop,
-      marginLeft: layoutProps.marginLeft,
-      marginBottom: layoutProps.marginBottom,
-      marginRight: layoutProps.marginRight,
-    },
-  },
 };
 
 export function Button(props: Record<string, Prop>) {
@@ -211,7 +144,7 @@ export function Button(props: Record<string, Prop>) {
 
   return (
     <View ref={Platform.OS === 'web' ? (ref) => connect(drag(ref as any)) : undefined}>
-      <RNButton {...actualProps} />
+      <RNEButton {...actualProps} />
     </View>
   );
 }

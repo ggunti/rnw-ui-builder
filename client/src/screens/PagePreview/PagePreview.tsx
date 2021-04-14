@@ -2,7 +2,7 @@ import React from 'react';
 import { Editor, Frame, Element } from '@craftjs/core';
 import { Layout } from '../../common';
 import { RenderNode } from '../../UiEditor';
-import { draggableComponents, Container } from '../../draggables';
+import { draggableComponents, View } from '../../draggables';
 import { PageType } from '../../types';
 
 interface PagePreviewProps {
@@ -25,7 +25,7 @@ function PagePreview(props: PagePreviewProps) {
       {props.page.id > 0 && (
         <Editor enabled={false} resolver={draggableComponents} onRender={RenderNode}>
           <Frame data={props.page.json}>
-            <Element is={Container} canvas />
+            <Element is={View} canvas />
           </Frame>
         </Editor>
       )}

@@ -25,3 +25,6 @@ export const PHONE_WIDTHS = [
 export * from './layoutProps';
 export * from './viewStyleProps';
 export * from './textStyleProps';
+export * from './imageStyleProps';
+export * from './shadowProps';
+export * from './iconProps';
