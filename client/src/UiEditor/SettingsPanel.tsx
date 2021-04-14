@@ -24,7 +24,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = () => {
         <View style={styles.innerContainer}>
           <View style={styles.selectedContainer}>
             <Text>Selected</Text>
-            <Badge value='Selected' />
+            <Badge badgeStyle={styles.badge} value={selected.name} />
           </View>
           {selected.uiSettings && React.createElement(selected.uiSettings)}
         </View>
@@ -52,5 +52,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  badge: {
+    paddingHorizontal: 10,
   },
 });
