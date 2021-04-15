@@ -8,7 +8,7 @@ export function sortObjectByKeys<T>(obj: Record<string, T>) {
 }
 
 // get the props which will be passed to the user component (View, Text, Button, etc)
-export function getActualProps(props: Record<string, Prop>) {
+export function getActualProps(props: Record<string, any>) {
   const actualProps: Record<string, any> = {};
   const nonDefaultProps = getNonDefaultProps(props);
   _.forEach(nonDefaultProps, (p, key) => {
@@ -22,17 +22,19 @@ export function getActualProps(props: Record<string, Prop>) {
 }
 
 // get only the props which are not empty object, and which value is not undefined
-export function getNonDefaultProps(props: Record<string, Prop>) {
+export function getNonDefaultProps(props: Record<string, any>) {
   const nonDefaultProps: Record<string, Prop> = {};
   _.forEach(props, (p, key) => {
     // sometimes we have children = undefined
     if (p) {
       if (isBasicProp(p)) {
-        if ((p as BasicProp).value !== undefined) {
+        // p is a BasicProp
+        if (p.value !== undefined) {
           nonDefaultProps[key] = p;
         }
       } else {
-        const nonDefaultSubprops = getNonDefaultProps((p as NestedProp).subprops);
+        // p is a NestedProp
+        const nonDefaultSubprops = getNonDefaultProps(p.subprops);
         if (!_.isEmpty(nonDefaultSubprops)) {
           nonDefaultProps[key] = { name: p.name, subprops: nonDefaultSubprops };
         }
