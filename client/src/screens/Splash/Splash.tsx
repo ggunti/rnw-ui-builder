@@ -9,7 +9,7 @@ export default function Splash() {
       <View style={styles.container}>
         <View style={styles.row}>
           <Icon name='build' type='material' containerStyle={styles.iconContainer} />
-          <Text style={styles.text}>RNW App Builder</Text>
+          <Text style={styles.text}>RNW UI Builder</Text>
         </View>
         <ActivityIndicator animating={true} color='black' />
       </View>

@@ -19,6 +19,6 @@ and not use the signup feature, you not need to setup mailing. The other fields 
 1. Make sure that you are able to create and run [react-native](https://reactnative.dev/) projects on your computer.
 2. Run `npm install` inside the `client` directory.
 3. Make sure that the server is running.
-4. Run `npm run web` to start the app builder for the web. Then navigate to `http://localhost:8080` in your browser. If you want to run the app for android or iOS,
+4. Run `npm run web` to start the UI builder for the web. Then navigate to `http://localhost:8080` in your browser. If you want to run the app for android or iOS,
 run `npm run android` or `npm run ios`. Note that the android & iOS versions contain only the preview functionality. They will not allow you to build pages, they allow
 only to preview pages that you already built using the web version of the app.

@@ -16,7 +16,7 @@ export function HeaderTitle(props: HeaderTitleProps) {
       <View style={styles.row}>
         <Icon name='build' type='material' containerStyle={{ marginRight: 5 }} />
         <Text>
-          <Text style={styles.boldText}>RNW App Builder</Text> {'>'} {props.children}
+          <Text style={styles.boldText}>RNW UI Builder</Text> {'>'} {props.children}
         </Text>
       </View>
       {props.signedIn && (
