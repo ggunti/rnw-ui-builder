@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.rnw_app_builder"
+        applicationId "com.rnw_ui_builder"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 2

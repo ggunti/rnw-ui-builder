@@ -1,4 +1,4 @@
-package com.rnw_app_builder;
+package com.rnw_ui_builder;
 
 import android.os.Bundle; // react-native-splash-screen
 import com.facebook.react.ReactActivity;
@@ -18,6 +18,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "appBuilder";
+    return "uiBuilder";
   }
 }

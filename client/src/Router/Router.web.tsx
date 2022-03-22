@@ -24,7 +24,7 @@ import { RootState } from '../redux/store';
 const Stack = createStackNavigator<StackParamList>();
 
 const linking: LinkingOptions = {
-  prefixes: ['http://localhost:8080', 'https://order-software.com/appBuilder'],
+  prefixes: ['http://localhost:8080', 'https://order-software.com/uiBuilder'],
   config: {
     screens: {
       login: PREFIX + 'login',

@@ -5,7 +5,7 @@ const rootDir = path.join(__dirname, '..');
 const webpackEnv = process.env.NODE_ENV || 'development';
 
 module.exports = function (env) {
-  const publicPath = env && env.production ? '/appBuilder/' : '/';
+  const publicPath = env && env.production ? '/uiBuilder/' : '/';
   return {
     mode: webpackEnv,
     entry: {

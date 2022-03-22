@@ -8,7 +8,7 @@ const API_PRODUCTION_URL = 'https://order-software.com/app-builder-backend/api';
 
 export const API_BASE_URL = __DEV__ ? API_DEV_URL : API_PRODUCTION_URL;
 
-export const PREFIX = 'appBuilder/';
+export const PREFIX = 'uiBuilder/';
 
 export const PHONE_WIDTHS = [
   { label: 'iPhone 5/SE / iPod Touch (320px)', value: 320 },
