@@ -13,8 +13,8 @@
     "build:web": "cd web && cross-env NODE_ENV=production webpack --env production"
   },
   "dependencies": {
-    "@craftjs/core": "0.1.0-beta.16",
-    "@craftjs/layers": "0.1.0-beta.16",
+    "@craftjs/core": "0.1.0-beta.17",
+    "@craftjs/layers": "0.1.0-beta.17",
     "@react-native-async-storage/async-storage": "^1.14.1",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.9.3",
