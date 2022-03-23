@@ -9,7 +9,7 @@ interface ErrorPopupProps {
   onHideError?: () => void;
 }
 
-const ErrorPopup: React.FC<ErrorPopupProps> = (props) => {
+const ErrorPopup: React.FC<ErrorPopupProps> = props => {
   const { theme } = useContext(ThemeContext);
   const messageStyle = { ...styles.message, color: theme.colors?.error };
   return (

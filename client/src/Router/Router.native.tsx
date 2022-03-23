@@ -40,7 +40,7 @@ class Router extends Component<RouterProps> {
         <Stack.Navigator
           screenOptions={{
             headerBackTitleVisible: false,
-            headerTitle: (titleProps) => (
+            headerTitle: titleProps => (
               <View style={styles.row}>
                 <Icon name='build' type='material' containerStyle={{ marginRight: 5 }} />
                 <Text>{titleProps.children}</Text>

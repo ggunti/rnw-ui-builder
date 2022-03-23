@@ -332,7 +332,7 @@ export function Input(props: Record<string, Prop>) {
   const actualProps = getActualProps(props);
 
   return (
-    <View ref={Platform.OS === 'web' ? (ref) => connect(drag(ref as any)) : undefined}>
+    <View ref={Platform.OS === 'web' ? ref => connect(drag(ref as any)) : undefined}>
       <RNInput {...actualProps} />
     </View>
   );

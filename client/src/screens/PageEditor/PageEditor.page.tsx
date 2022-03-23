@@ -62,7 +62,7 @@ class PageEditorPage extends Component<PageEditorPageProps, PageEditorPageState>
 
     const updatedPage = { ...this.state.page, json: serializedJson };
     const pages = [...this.props.pages];
-    const pageIndex = pages.findIndex((p) => p.id === this.pageId);
+    const pageIndex = pages.findIndex(p => p.id === this.pageId);
     pages[pageIndex] = updatedPage;
     const onSuccess = () => this.props.setPages({ pages });
     const onError = () => {};
@@ -73,7 +73,7 @@ class PageEditorPage extends Component<PageEditorPageProps, PageEditorPageState>
     const nodes = JSON.parse(serializedJson);
     const page = { id: this.pageId, name: this.state.page.name, content: generatePage(nodes) };
     const componentNames = getComponentNames(nodes);
-    const components = componentNames.map((name) => ({
+    const components = componentNames.map(name => ({
       name,
       // @ts-ignore
       content: generateComponent(draggableComponents[name].template),
@@ -101,7 +101,7 @@ class PageEditorPage extends Component<PageEditorPageProps, PageEditorPageState>
         onHideError={this.onHideError}
         page={this.state.page}
         phoneWidth={this.state.phoneWidth}
-        setPhoneWidth={(phoneWidth) => this.setState({ phoneWidth })}
+        setPhoneWidth={phoneWidth => this.setState({ phoneWidth })}
         onPressSave={this.onPressSave}
         onPressGenerateCode={this.onPressGenerateCode}
       />

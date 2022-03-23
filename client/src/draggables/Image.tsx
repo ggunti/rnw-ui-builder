@@ -101,7 +101,7 @@ export function Image(props: Record<string, Prop>) {
   const actualProps = getActualProps(props) as any;
 
   return (
-    <View ref={Platform.OS === 'web' ? (ref) => connect(drag(ref as any)) : undefined}>
+    <View ref={Platform.OS === 'web' ? ref => connect(drag(ref as any)) : undefined}>
       <RNEImage {...actualProps} />
     </View>
   );

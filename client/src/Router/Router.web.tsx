@@ -34,7 +34,7 @@ const linking: LinkingOptions = {
       projectPreview: {
         path: PREFIX + 'projects/:projectId/preview',
         parse: {
-          projectId: (projectId) => parseInt(projectId, 10),
+          projectId: projectId => parseInt(projectId, 10),
         },
         stringify: {
           projectId: (projectId: number) => projectId.toString(),
@@ -43,8 +43,8 @@ const linking: LinkingOptions = {
       pagePreview: {
         path: PREFIX + 'projects/:projectId/pages/:pageId/preview',
         parse: {
-          projectId: (projectId) => parseInt(projectId, 10),
-          pageId: (pageId) => parseInt(pageId, 10),
+          projectId: projectId => parseInt(projectId, 10),
+          pageId: pageId => parseInt(pageId, 10),
         },
         stringify: {
           projectId: (projectId: number) => projectId.toString(),
@@ -54,7 +54,7 @@ const linking: LinkingOptions = {
       projectEditor: {
         path: PREFIX + 'projects/:projectId/edit',
         parse: {
-          projectId: (projectId) => parseInt(projectId, 10),
+          projectId: projectId => parseInt(projectId, 10),
         },
         stringify: {
           projectId: (projectId: number) => projectId.toString(),
@@ -63,8 +63,8 @@ const linking: LinkingOptions = {
       pageEditor: {
         path: PREFIX + 'projects/:projectId/pages/:pageId/edit',
         parse: {
-          projectId: (projectId) => parseInt(projectId, 10),
-          pageId: (pageId) => parseInt(pageId, 10),
+          projectId: projectId => parseInt(projectId, 10),
+          pageId: pageId => parseInt(pageId, 10),
         },
         stringify: {
           projectId: (projectId: number) => projectId.toString(),
@@ -92,7 +92,7 @@ class Router extends Component<RouterProps> {
         <Stack.Navigator
           screenOptions={{
             headerBackImage: ({ tintColor }) => <Icon name='arrow-back' type='material' color={tintColor} />,
-            headerTitle: (titleProps) => (
+            headerTitle: titleProps => (
               <HeaderTitle
                 {...titleProps}
                 signedIn={this.props.signedIn}

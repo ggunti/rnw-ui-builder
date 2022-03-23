@@ -9,7 +9,7 @@ interface DropdownProps {
 
 export function Dropdown(props: DropdownProps) {
   return (
-    <select style={props.style} value={props.currentValue} onChange={(e) => props.onChange(e.target.value)}>
+    <select style={props.style} value={props.currentValue} onChange={e => props.onChange(e.target.value)}>
       {props.options.map(({ value, label }) => (
         <option key={value} value={value}>
           {label}

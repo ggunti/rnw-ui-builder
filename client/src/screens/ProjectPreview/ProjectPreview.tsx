@@ -33,7 +33,7 @@ class ProjectPreview extends Component<ProjectPreviewProps> {
       >
         <FlatList
           data={this.props.pages}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={item => item.id.toString()}
           ListHeaderComponent={
             <ListItem bottomDivider>
               <ListItem.Content style={styles.headerContent}>

@@ -17,7 +17,7 @@ export class ColorPicker extends React.Component<ColorPickerProps, ColorPickerSt
   };
 
   handleClick = () => {
-    this.setState((prevState) => ({ displayColorPicker: !prevState.displayColorPicker }));
+    this.setState(prevState => ({ displayColorPicker: !prevState.displayColorPicker }));
   };
 
   handleClose = () => {

@@ -7,7 +7,7 @@ interface LoadingPopupProps {
   loading?: boolean;
 }
 
-const LoadingPopup: React.FC<LoadingPopupProps> = (props) => {
+const LoadingPopup: React.FC<LoadingPopupProps> = props => {
   const { theme } = useContext(ThemeContext);
   return (
     <Overlay

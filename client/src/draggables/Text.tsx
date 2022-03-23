@@ -250,7 +250,7 @@ export function Text(props: Record<string, Prop>) {
   const { text } = actualProps;
 
   return (
-    <TouchableOpacity ref={Platform.OS === 'web' ? (ref) => connect(drag(ref as any)) : undefined}>
+    <TouchableOpacity ref={Platform.OS === 'web' ? ref => connect(drag(ref as any)) : undefined}>
       <RNEText {...actualProps}>{text}</RNEText>
     </TouchableOpacity>
   );

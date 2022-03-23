@@ -66,15 +66,15 @@ class ProjectEditorPage extends Component<ProjectEditorPageProps, ProjectEditorP
 
   onPressGenerate = () => {
     const componentNames = new Set<string>();
-    const pages = this.props.pages.map((p) => {
+    const pages = this.props.pages.map(p => {
       if (p.json) {
         const nodes = JSON.parse(p.json);
-        _.forEach(nodes, (val) => componentNames.add(val.type.resolvedName));
+        _.forEach(nodes, val => componentNames.add(val.type.resolvedName));
         return { ...p, content: generatePage(nodes) };
       }
       return { ...p, content: '' };
     });
-    const components = Array.from(componentNames).map((name) => ({
+    const components = Array.from(componentNames).map(name => ({
       name,
       // @ts-ignore
       content: generateComponent(draggableComponents[name].template),
@@ -87,7 +87,7 @@ class ProjectEditorPage extends Component<ProjectEditorPageProps, ProjectEditorP
 
   onPressDeletePage = (id: number) => {
     const onSuccess = () => {
-      const pages = this.props.pages.filter((p) => p.id !== id);
+      const pages = this.props.pages.filter(p => p.id !== id);
       this.props.setPages({ pages });
     };
     const onError = () => {};
@@ -131,11 +131,11 @@ class ProjectEditorPage extends Component<ProjectEditorPageProps, ProjectEditorP
         onHideError={this.onHideError}
         pages={this.props.pages}
         hoveredPageId={this.state.hoveredPageId}
-        setHoveredPageId={(hoveredPageId) => this.setState({ hoveredPageId })}
+        setHoveredPageId={hoveredPageId => this.setState({ hoveredPageId })}
         modalVisible={this.state.modalVisible}
-        setModalVisible={(modalVisible) => this.setState({ modalVisible })}
+        setModalVisible={modalVisible => this.setState({ modalVisible })}
         newPageName={this.state.newPageName}
-        setNewPageName={(newPageName) => this.setState({ newPageName })}
+        setNewPageName={newPageName => this.setState({ newPageName })}
         addDisabled={this.state.newPageName.length === 0}
         onAddNewPage={this.onAddNewPage}
         onPressGenerate={this.onPressGenerate}

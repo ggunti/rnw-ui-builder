@@ -26,7 +26,7 @@ export function Topbar(props: TopbarProps) {
         <Dropdown
           currentValue={props.phoneWidth.toString()}
           options={PHONE_WIDTHS}
-          onChange={(value) => props.setPhoneWidth(parseInt(value, 10))}
+          onChange={value => props.setPhoneWidth(parseInt(value, 10))}
         />
       </View>
       <View style={styles.row}>

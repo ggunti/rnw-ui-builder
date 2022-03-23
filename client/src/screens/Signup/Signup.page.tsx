@@ -48,11 +48,11 @@ class SignupPage extends Component<SignupPageProps, SignupPageState> {
         errorMessage={this.props.errorMessageSignup}
         onHideError={this.props.hideSignupError}
         email={this.state.email}
-        setEmail={(email) => this.setState({ email })}
+        setEmail={email => this.setState({ email })}
         password={this.state.password}
-        setPassword={(password) => this.setState({ password })}
+        setPassword={password => this.setState({ password })}
         rePassword={this.state.rePassword}
-        setRePassword={(rePassword) => this.setState({ rePassword })}
+        setRePassword={rePassword => this.setState({ rePassword })}
         onPressSignup={this.onPressSignup}
         onPressLogin={() => this.props.navigation.navigate('login')}
       />

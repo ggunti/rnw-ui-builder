@@ -547,7 +547,7 @@ export function View(props: any) {
   const actualProps = getActualProps(props);
 
   return (
-    <RNView ref={Platform.OS === 'web' ? (ref) => connect(drag(ref as any)) : undefined} {...actualProps}>
+    <RNView ref={Platform.OS === 'web' ? ref => connect(drag(ref as any)) : undefined} {...actualProps}>
       {props.children}
     </RNView>
   );

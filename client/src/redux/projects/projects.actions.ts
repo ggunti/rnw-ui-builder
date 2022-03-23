@@ -37,16 +37,16 @@ export function getProjects(
   onSuccess: (projects: ProjectType[]) => void = () => {},
   onError: (errMsg: string) => void = () => {},
 ): AppThunk<Promise<void>> {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(startLoadingGetProjects());
     return axios
       .get('/projects')
-      .then((res) => res.data)
+      .then(res => res.data)
       .then(({ projects }) => {
         dispatch(finishLoadingGetProjects());
         onSuccess(projects);
       })
-      .catch((err) => {
+      .catch(err => {
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingGetProjects());
         dispatch(setGetProjectsError(errMsg));
@@ -66,16 +66,16 @@ export function createProject(
   onSuccess: (project: ProjectType) => void = () => {},
   onError: (errMsg: string) => void = () => {},
 ): AppThunk<Promise<void>> {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(startLoadingCreateProject());
     return axios
       .post('/projects/create', { name })
-      .then((res) => res.data)
+      .then(res => res.data)
       .then(({ project }) => {
         dispatch(finishLoadingCreateProject());
         onSuccess(project);
       })
-      .catch((err) => {
+      .catch(err => {
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingCreateProject());
         dispatch(setCreateProjectError(errMsg));
@@ -101,16 +101,16 @@ export function generateProjectCode(
   onSuccess: () => void = () => {},
   onError: (errMsg: string) => void = () => {},
 ): AppThunk<Promise<void>> {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(startLoadingGenerateProjectCode());
     return axios
       .post('/projects/generateCode', { project, components }, { responseType: 'blob' })
-      .then((res) => {
+      .then(res => {
         dispatch(finishLoadingGenerateProjectCode());
         fileDownload(res.data, `Proj${project.id}.zip`);
         onSuccess();
       })
-      .catch((err) => {
+      .catch(err => {
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingGenerateProjectCode());
         dispatch(setGenerateProjectCodeError(errMsg));

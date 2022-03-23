@@ -17,7 +17,7 @@ export const RenderNode = ({ render }: { render: any }) => {
     deletable,
     connectors: { drag },
     parent,
-  } = useNode((node) => ({
+  } = useNode(node => ({
     isActive: node.events.selected,
     isHover: node.events.hovered,
     dom: node.dom,

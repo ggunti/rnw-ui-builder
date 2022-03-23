@@ -27,7 +27,7 @@ function getNestedNode(nodes: Record<string, Node>, nodeKey: string): NestedNode
   return {
     name: node.type.resolvedName,
     props: getProcessedProps(getNonDefaultProps(node.props)),
-    nodes: node.nodes.map((childKey) => getNestedNode(nodes, childKey)),
+    nodes: node.nodes.map(childKey => getNestedNode(nodes, childKey)),
   };
 }
 
@@ -91,7 +91,7 @@ export function generatePage(nodes: { [key: string]: Node }): string {
     pageName: 'Page',
     componentNames: function () {
       const uniqueNodeNames = new Set<string>();
-      _.forEach(nodes, (val) => uniqueNodeNames.add(val.type.resolvedName));
+      _.forEach(nodes, val => uniqueNodeNames.add(val.type.resolvedName));
       return Array.from(uniqueNodeNames).join(', ');
     },
     nodes: nestedNode,

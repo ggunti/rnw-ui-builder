@@ -41,7 +41,7 @@ class Projects extends Component<ProjectsProps> {
       >
         <FlatList
           data={this.props.projects}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={item => item.id.toString()}
           renderItem={this.renderItem}
           ListEmptyComponent={<Text>You have no projects.</Text>}
           ListFooterComponent={

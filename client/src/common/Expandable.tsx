@@ -7,7 +7,7 @@ interface ExpandableProps {
   toggleIsExpanded: () => void;
 }
 
-export const Expandable: React.FC<ExpandableProps> = (props) => {
+export const Expandable: React.FC<ExpandableProps> = props => {
   return (
     <>
       <div style={styles.container} onClick={props.toggleIsExpanded}>

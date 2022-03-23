@@ -47,12 +47,12 @@ export function signup(
     dispatch(startLoadingSignup());
     return axios
       .post('/users/create', { email, password })
-      .then((resp) => resp.data)
+      .then(resp => resp.data)
       .then(() => {
         dispatch(finishLoadingSignup());
         onSuccess();
       })
-      .catch((err) => {
+      .catch(err => {
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingSignup());
         dispatch(setSignupError(errMsg));
@@ -76,8 +76,8 @@ export function login(
     dispatch(startLoadingLogin());
     return axios
       .post('/login', { email, password })
-      .then((resp) => resp.data)
-      .then((data) => {
+      .then(resp => resp.data)
+      .then(data => {
         const user: UserType = {
           ...data.user,
           isVerified: data.user.email_verified_at ? true : false,
@@ -85,7 +85,7 @@ export function login(
         dispatch(finishLoadingLogin());
         onSuccess(user, data.token);
       })
-      .catch((err) => {
+      .catch(err => {
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingLogin());
         dispatch(setLoginError(errMsg));
@@ -108,12 +108,12 @@ export function logout(
     dispatch(startLoadingLogout());
     return axios
       .post('/logout')
-      .then((res) => res.data)
+      .then(res => res.data)
       .then(() => {
         dispatch(finishLoadingLogout());
         onSuccess();
       })
-      .catch((err) => {
+      .catch(err => {
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingLogout());
         dispatch(setLogoutError(errMsg));
@@ -136,8 +136,8 @@ export function verifyToken(
     dispatch(startLoadingVerifyToken());
     return axios
       .post('/verifyToken')
-      .then((res) => res.data)
-      .then((data) => {
+      .then(res => res.data)
+      .then(data => {
         const user = {
           ...data.user,
           isVerified: data.user.email_verified_at ? true : false,
@@ -145,7 +145,7 @@ export function verifyToken(
         dispatch(finishLoadingVerifyToken());
         onSuccess(user);
       })
-      .catch((err) => {
+      .catch(err => {
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingVerifyToken());
         dispatch(setVerifyTokenError(errMsg));
@@ -168,12 +168,12 @@ export function sendVerificationEmail(
     dispatch(startLoadingSendVerificationEmail());
     return axios
       .get('/email/resend')
-      .then((res) => res.data)
+      .then(res => res.data)
       .then(() => {
         dispatch(finishLoadingSendVerificationEmail());
         onSuccess();
       })
-      .catch((err) => {
+      .catch(err => {
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingSendVerificationEmail());
         dispatch(setSendVerificationEmailError(errMsg));

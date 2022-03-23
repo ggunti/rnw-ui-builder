@@ -42,9 +42,9 @@ class LoginPage extends Component<LoginPageProps, LoginPageState> {
         errorMessage={this.props.errorMessageLogin}
         onHideError={this.props.hideLoginError}
         email={this.state.email}
-        setEmail={(email) => this.setState({ email })}
+        setEmail={email => this.setState({ email })}
         password={this.state.password}
-        setPassword={(password) => this.setState({ password })}
+        setPassword={password => this.setState({ password })}
         onPressLogin={this.onPressLogin}
         onPressSignup={() => this.props.navigation.navigate('signup')}
       />

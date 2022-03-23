@@ -1,8 +1,8 @@
 import React from 'react';
 import { View as RNView, TouchableOpacity, StyleSheet } from 'react-native';
-import { Text as RNText, Icon } from 'react-native-elements';
+import { Text as RNText, Icon as RNEIcon } from 'react-native-elements';
 import { Element, useEditor } from '@craftjs/core';
-import { View, Text, Button, Input, Image } from '../draggables';
+import { View, Text, Button, Input, Image, Icon } from '../draggables';
 
 interface ToolboxElementProps {
   title: string;
@@ -11,7 +11,7 @@ interface ToolboxElementProps {
 
 const ToolboxElement = React.forwardRef((props: ToolboxElementProps, ref: any) => (
   <TouchableOpacity ref={ref} style={elementStyles.container}>
-    <Icon name={props.icon.name} type={props.icon.type} />
+    <RNEIcon name={props.icon.name} type={props.icon.type} />
     <RNText>{props.title}</RNText>
   </TouchableOpacity>
 ));
@@ -42,27 +42,32 @@ const Toolbox: React.FC<ToolboxProps> = () => {
         <ToolboxElement
           title='View'
           icon={{ name: 'check-box-outline-blank', type: 'material' }}
-          ref={(ref) => connectors.create(ref as any, <Element is={View} canvas />)}
+          ref={ref => connectors.create(ref as any, <Element is={View} canvas />)}
         />
         <ToolboxElement
           title='Text'
           icon={{ name: 'short-text', type: 'material' }}
-          ref={(ref) => connectors.create(ref as any, <Text />)}
+          ref={ref => connectors.create(ref as any, <Text />)}
         />
         <ToolboxElement
           title='Button'
           icon={{ name: 'smart-button', type: 'material' }}
-          ref={(ref: any) => connectors.create(ref, <Button />)}
+          ref={ref => connectors.create(ref, <Button />)}
         />
         <ToolboxElement
           title='Input'
           icon={{ name: 'input', type: 'material' }}
-          ref={(ref) => connectors.create(ref as any, <Input />)}
+          ref={ref => connectors.create(ref as any, <Input />)}
         />
         <ToolboxElement
           title='Image'
           icon={{ name: 'image-outline', type: 'material-community' }}
-          ref={(ref) => connectors.create(ref as any, <Image />)}
+          ref={ref => connectors.create(ref as any, <Image />)}
+        />
+        <ToolboxElement
+          title='Icon'
+          icon={{ name: 'emoticon-kiss-outline', type: 'material-community' }}
+          ref={ref => connectors.create(ref as any, <Icon />)}
         />
       </RNView>
     </RNView>

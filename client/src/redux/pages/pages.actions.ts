@@ -54,17 +54,17 @@ export function getPages(
   onSuccess: (pages: PageType[]) => void = () => {},
   onError: (errMsg: string) => void = () => {},
 ): AppThunk<Promise<void>> {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(startLoadingGetPages());
     return axios
       .get(`/projects/${projectId}/pages`)
-      .then((res) => res.data)
-      .then((data) => {
+      .then(res => res.data)
+      .then(data => {
         const pages = data.pages.map((p: any) => ({ ...p, json: decompress(p.compressedState) }));
         dispatch(finishLoadingGetPages());
         onSuccess(pages);
       })
-      .catch((err) => {
+      .catch(err => {
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingGetPages());
         dispatch(setGetPagesError(errMsg));
@@ -84,17 +84,17 @@ export function getPage(
   onSuccess: (page: PageType) => void = () => {},
   onError: (errMsg: string) => void = () => {},
 ): AppThunk<Promise<void>> {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(startLoadingGetPage());
     return axios
       .get(`/pages/${id}`)
-      .then((res) => res.data)
-      .then((data) => {
+      .then(res => res.data)
+      .then(data => {
         const page = { ...data.page, json: decompress(data.page.compressedState) };
         dispatch(finishLoadingGetPage());
         onSuccess(page);
       })
-      .catch((err) => {
+      .catch(err => {
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingGetPage());
         dispatch(setGetPageError(errMsg));
@@ -114,17 +114,17 @@ export function createPage(
   onSuccess: (page: PageType) => void = () => {},
   onError: (errMsg: string) => void = () => {},
 ): AppThunk<Promise<void>> {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(startLoadingCreatePage());
     return axios
       .post(`/projects/${projectId}/pages/create`, { name })
-      .then((res) => res.data)
-      .then((data) => {
+      .then(res => res.data)
+      .then(data => {
         const page = { ...data.page, json: decompress(data.page.compressedState) };
         dispatch(finishLoadingCreatePage());
         onSuccess(page);
       })
-      .catch((err) => {
+      .catch(err => {
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingCreatePage());
         dispatch(setCreatePageError(errMsg));
@@ -144,17 +144,17 @@ export function deletePage(
   onSuccess: (page: PageType) => void = () => {},
   onError: (errMsg: string) => void = () => {},
 ): AppThunk<Promise<void>> {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(startLoadingDeletePage());
     return axios
       .post(`pages/${pageId}/delete`)
-      .then((res) => res.data)
-      .then((data) => {
+      .then(res => res.data)
+      .then(data => {
         const page = { ...data.page, json: decompress(data.page.compressedState) };
         dispatch(finishLoadingDeletePage());
         onSuccess(page);
       })
-      .catch((err) => {
+      .catch(err => {
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingDeletePage());
         dispatch(setDeletePageError(errMsg));
@@ -174,19 +174,19 @@ export function updatePage(
   onSuccess: (page: PageType) => void = () => {},
   onError: (errMsg: string) => void = () => {},
 ): AppThunk<Promise<void>> {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(startLoadingUpdatePage());
     const compressedPage = { ...page, compressedState: compress(page.json) };
     delete compressedPage.json;
     return axios
       .post(`pages/${page.id}/update`, compressedPage)
-      .then((res) => res.data)
-      .then((data) => {
+      .then(res => res.data)
+      .then(data => {
         const updatedPage = { ...data.page, json: decompress(data.page.compressedState) };
         dispatch(finishLoadingUpdatePage());
         onSuccess(updatedPage);
       })
-      .catch((err) => {
+      .catch(err => {
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingUpdatePage());
         dispatch(setUpdatePageError(errMsg));
@@ -214,16 +214,16 @@ export function generatePageCode(
   onSuccess: () => void = () => {},
   onError: (errMsg: string) => void = () => {},
 ): AppThunk<Promise<void>> {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(startLoadingGeneratePageCode());
     return axios
       .post('pages/generateCode', { page, components }, { responseType: 'blob' })
-      .then((res) => {
+      .then(res => {
         dispatch(finishLoadingGeneratePageCode());
         fileDownload(res.data, `Proj${projectId} - ${page.name}.zip`);
         onSuccess();
       })
-      .catch((err) => {
+      .catch(err => {
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingGeneratePageCode());
         dispatch(setGeneratePageCodeError(errMsg));

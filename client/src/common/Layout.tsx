@@ -11,7 +11,7 @@ interface LayoutProps {
   onHideError?: () => void;
 }
 
-const Layout: React.FC<LayoutProps> = (props) => {
+const Layout: React.FC<LayoutProps> = props => {
   return (
     <>
       <SafeAreaView style={[styles.container, props.style]}>{props.children}</SafeAreaView>

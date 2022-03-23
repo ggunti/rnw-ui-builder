@@ -17,11 +17,11 @@ function RenderBasicProp({ pKey, prop }: { pKey: string; prop: BasicProp }) {
         <input
           checked={prop.value !== undefined}
           type='checkbox'
-          onChange={(e) => {
+          onChange={e => {
             if (e.target.checked) {
-              setProp((props) => _.set(props, pKey, { ...prop, value: prop.oldValue, shownValue: prop.oldShownValue }));
+              setProp(props => _.set(props, pKey, { ...prop, value: prop.oldValue, shownValue: prop.oldShownValue }));
             } else {
-              setProp((props) =>
+              setProp(props =>
                 _.set(props, pKey, { ...prop, oldValue: prop.value, oldShownValue: prop.shownValue, value: undefined }),
               );
             }
@@ -36,7 +36,7 @@ function RenderBasicProp({ pKey, prop }: { pKey: string; prop: BasicProp }) {
               {...prop.selectorProps}
               containerStyle={styles.flex as any}
               value={prop.shownValue as string}
-              onChangeText={(value) => setProp((props) => _.set(props, pKey, { ...prop, value, shownValue: value }))}
+              onChangeText={value => setProp(props => _.set(props, pKey, { ...prop, value, shownValue: value }))}
             />
           )}
           {prop.selectorType === 'slider' && (
@@ -44,14 +44,14 @@ function RenderBasicProp({ pKey, prop }: { pKey: string; prop: BasicProp }) {
               {...prop.selectorProps}
               style={styles.flex as any}
               value={prop.shownValue as number}
-              onValueChange={(value) => setProp((props) => _.set(props, pKey, { ...prop, value, shownValue: value }))}
+              onValueChange={value => setProp(props => _.set(props, pKey, { ...prop, value, shownValue: value }))}
             />
           )}
           {prop.selectorType === 'colorPicker' && (
             <ColorPicker
               color={prop.shownValue as string}
-              onChange={(value) =>
-                setProp((props) => _.set(props, pKey, { ...prop, value: value.hex, shownValue: value.hex }))
+              onChange={value =>
+                setProp(props => _.set(props, pKey, { ...prop, value: value.hex, shownValue: value.hex }))
               }
             />
           )}
@@ -59,7 +59,7 @@ function RenderBasicProp({ pKey, prop }: { pKey: string; prop: BasicProp }) {
             <CheckBox
               checked={prop.shownValue as boolean}
               onPress={() =>
-                setProp((props) => _.set(props, pKey, { ...prop, value: !prop.value, shownValue: !prop.value }))
+                setProp(props => _.set(props, pKey, { ...prop, value: !prop.value, shownValue: !prop.value }))
               }
             />
           )}
@@ -69,7 +69,7 @@ function RenderBasicProp({ pKey, prop }: { pKey: string; prop: BasicProp }) {
               {...prop.selectorProps}
               style={styles.flex}
               currentValue={prop.shownValue as string}
-              onChange={(value) => setProp((props) => _.set(props, pKey, { ...prop, value, shownValue: value }))}
+              onChange={value => setProp(props => _.set(props, pKey, { ...prop, value, shownValue: value }))}
             />
           )}
         </>
@@ -87,7 +87,7 @@ function RenderNestedProp({ pKey, prop }: { pKey: string; prop: NestedProp }) {
     <Expandable
       title={prop.name}
       isExpanded={prop.isExpanded}
-      toggleIsExpanded={() => setProp((props) => _.set(props, pKey, { ...prop, isExpanded: !prop.isExpanded }))}
+      toggleIsExpanded={() => setProp(props => _.set(props, pKey, { ...prop, isExpanded: !prop.isExpanded }))}
     >
       {_.map(prop.subprops, (subprop, baseKey) => (
         <RenderProp key={`${pKey}.subprops.${baseKey}`} pKey={`${pKey}.subprops.${baseKey}`} prop={subprop} />
@@ -105,7 +105,7 @@ function RenderProp({ pKey, prop }: { pKey: string; prop: Prop }) {
 }
 
 export function Renderer() {
-  const { nodeProps } = useNode((node) => ({ nodeProps: node.data.props }));
+  const { nodeProps } = useNode(node => ({ nodeProps: node.data.props }));
   return (
     <div>
       {_.map(nodeProps, (prop, pKey) => (

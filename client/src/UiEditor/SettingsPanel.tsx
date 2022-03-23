@@ -6,7 +6,7 @@ import { useEditor } from '@craftjs/core';
 interface SettingsPanelProps {}
 
 export const SettingsPanel: React.FC<SettingsPanelProps> = () => {
-  const { selected } = useEditor((state) => {
+  const { selected } = useEditor(state => {
     const currentNodeId = state.events.selected;
     let selected;
     if (currentNodeId) {

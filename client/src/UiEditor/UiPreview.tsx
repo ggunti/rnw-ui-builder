@@ -11,7 +11,7 @@ interface UiPreviewProps {
 export function UiPreview({ json, phoneWidth }: UiPreviewProps) {
   const { connectors } = useEditor();
   return (
-    <RNView ref={(ref) => connectors.select(connectors.hover(ref as any, null), null)} style={styles.container}>
+    <RNView ref={ref => connectors.select(connectors.hover(ref as any, null), null)} style={styles.container}>
       <RNView style={[styles.phoneContainer, { width: phoneWidth }]}>
         <Frame data={json}>
           <Element is={View} canvas />
