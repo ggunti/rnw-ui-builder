@@ -95,7 +95,7 @@ const defaultInputProps: Record<string, Prop> = {
   leftIcon: {
     name: 'Left icon',
     subprops: {
-      name: iconProps.name,
+      name: { ...iconProps.name, optional: true, value: undefined },
       type: iconProps.type,
       size: iconProps.size,
       color: iconProps.color,
@@ -105,7 +105,7 @@ const defaultInputProps: Record<string, Prop> = {
   rightIcon: {
     name: 'Right icon',
     subprops: {
-      name: iconProps.name,
+      name: { ...iconProps.name, optional: true, value: undefined },
       type: iconProps.type,
       size: iconProps.size,
       color: iconProps.color,

@@ -84,7 +84,7 @@ const defaultButtonProps: Record<string, Prop> = {
   icon: {
     name: 'Icon',
     subprops: {
-      name: iconProps.name,
+      name: { ...iconProps.name, optional: true, value: undefined },
       type: iconProps.type,
       size: iconProps.size,
       color: iconProps.color,
