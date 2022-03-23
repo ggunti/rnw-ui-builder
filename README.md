@@ -9,7 +9,7 @@ UI builder for android &amp; iOS &amp; web based on react-native-web.
 - There are two mobile apps (android & iOS), which you can use only to preview the pages of your projects which you built using the web app. This way you can see how your pages will look on mobile devices.
 
 ### How to use it?
-1. Navigate to [RNW UI Builder](https://order-software.com/uiBuilder)
+1. Setup the project [locally](./LOCAL_SETUP.md), or just navigate to [RNW UI Builder](https://order-software.com/uiBuilder)
 2. Sign up and Login then:
 
 https://user-images.githubusercontent.com/26307699/159668397-56772dab-efa7-4f04-9298-0613ec5270e2.mov
@@ -26,11 +26,11 @@ https://user-images.githubusercontent.com/26307699/159668508-3caec8b6-6e07-4700-
 
 https://user-images.githubusercontent.com/26307699/159665607-f41cfdcb-2a32-4606-8f07-0573d498a261.mov
 
-6. After you built the pages of your project, use the web & mobile apps to see how the pages look (use the "Preview" button):
+6. After you built the pages of your project, use the web & mobile apps to see how the pages look like (use the "Preview" button):
 
 https://user-images.githubusercontent.com/26307699/159666921-ea6d3f68-bfb2-4436-aa19-620df2bac892.mov
 
-7. If you like how your pages look like, use the "Generate project code" or "Generate page code" to generate & download a `react-native-web` compatible code for your entire project, or just one page:
+7. If you like how your pages look like, use the "Generate project code" or "Generate page code" to generate & download a `react-native-web` compatible code for your entire project, or just for one page:
 
 https://user-images.githubusercontent.com/26307699/159668111-a6f0b3fe-2bfe-451b-85e0-3639a6080d86.mov
 
