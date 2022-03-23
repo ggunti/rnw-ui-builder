@@ -8,6 +8,33 @@ UI builder for android &amp; iOS &amp; web based on react-native-web.
 - There is a web app (the builder), which you can use to build the UI's of your pages inside any project. It's just drag and drop. You can also preview what you built directly in the web app.
 - There are two mobile apps (android & iOS), which you can use only to preview the pages of your projects which you built using the web app. This way you can see how your pages will look on mobile devices.
 
+### How to use it?
+1. Navigate to [RNW UI Builder](https://order-software.com/uiBuilder)
+2. Sign up and Login then:
+
+https://user-images.githubusercontent.com/26307699/159668397-56772dab-efa7-4f04-9298-0613ec5270e2.mov
+
+3. Create a project:
+
+https://user-images.githubusercontent.com/26307699/159668461-1b1b02da-db52-493d-8a5d-727cecb468ff.mov
+
+4. Select a project by pressing "Edit" and add a new page to your project:
+
+https://user-images.githubusercontent.com/26307699/159668508-3caec8b6-6e07-4700-bf7d-7be5fd330a3e.mov
+
+5. Select a page of your project by clicking on it. Then start building the UI of your app with drag and drop:
+
+https://user-images.githubusercontent.com/26307699/159665607-f41cfdcb-2a32-4606-8f07-0573d498a261.mov
+
+6. After you built the pages of your project, use the web & mobile apps to see how the pages look (use the "Preview" button):
+
+https://user-images.githubusercontent.com/26307699/159666921-ea6d3f68-bfb2-4436-aa19-620df2bac892.mov
+
+7. If you like how your pages look like, use the "Generate project code" or "Generate page code" to generate & download a `react-native-web` compatible code for your entire project, or just one page:
+
+https://user-images.githubusercontent.com/26307699/159668111-a6f0b3fe-2bfe-451b-85e0-3639a6080d86.mov
+
+
 Features:
 - [x] Multiple projects for each registered user
 - [x] Multiple pages (screens) per project
