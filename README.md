@@ -34,6 +34,7 @@ https://user-images.githubusercontent.com/26307699/159666921-ea6d3f68-bfb2-4436-
 
 https://user-images.githubusercontent.com/26307699/159668111-a6f0b3fe-2bfe-451b-85e0-3639a6080d86.mov
 
+8. Create a `react-native-web` app and include the generated files into it. Then, add logic to your pages, so your app will behave as you want.
 
 Features:
 - [x] Multiple projects for each registered user
