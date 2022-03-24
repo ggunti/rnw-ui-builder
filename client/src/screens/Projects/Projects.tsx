@@ -29,10 +29,12 @@ class Projects extends Component<ProjectsProps> {
       </ListItem.Content>
       <Button title='Preview' onPress={() => this.props.onPressProject(item.id)} />
       {Platform.OS === 'web' && <Button type='outline' title='Edit' onPress={() => this.props.onPressEdit(item.id)} />}
-      <DeleteButton
-        confirmQuestion='Do you really want to delete this project (including all pages)?'
-        onDelete={() => this.props.onDelete(item.id)}
-      />
+      {Platform.OS === 'web' && (
+        <DeleteButton
+          confirmQuestion='Do you really want to delete this project (including all pages)?'
+          onDelete={() => this.props.onDelete(item.id)}
+        />
+      )}
     </ListItem>
   );
 
