@@ -11,6 +11,10 @@ const INITIAL_STATE: ProjectsState = {
   loadingCreateProject: false,
   hasErrorCreateProject: false,
   errorMessageCreateProject: '',
+  // deleteProject
+  loadingDeleteProject: false,
+  hasErrorDeleteProject: false,
+  errorMessageDeleteProject: '',
   // generateProjectCode
   loadingGenerateProjectCode: false,
   hasErrorGenerateProjectCode: false,
@@ -39,6 +43,15 @@ export default (state = INITIAL_STATE, action: any): ProjectsState => {
       return { ...state, hasErrorCreateProject: true, errorMessageCreateProject: action.payload };
     case PROJECTS.HIDE_CREATE_PROJECT_ERROR:
       return { ...state, hasErrorCreateProject: false, errorMessageCreateProject: '' };
+    // deleteProject
+    case PROJECTS.START_LOADING_DELETE_PROJECT:
+      return { ...state, loadingDeleteProject: true };
+    case PROJECTS.FINISH_LOADING_DELETE_PROJECT:
+      return { ...state, loadingDeleteProject: false };
+    case PROJECTS.SET_DELETE_PROJECT_ERROR:
+      return { ...state, hasErrorDeleteProject: true, errorMessageDeleteProject: action.payload };
+    case PROJECTS.HIDE_DELETE_PROJECT_ERROR:
+      return { ...state, hasErrorDeleteProject: false, errorMessageDeleteProject: '' };
     // generateProjectCode
     case PROJECTS.START_LOADING_GENERATE_PROJECT_CODE:
       return { ...state, loadingGenerateProjectCode: true };

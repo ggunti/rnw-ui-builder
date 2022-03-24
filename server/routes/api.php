@@ -36,6 +36,7 @@ $router->post('/verifyToken', [AuthController::class, 'verifyToken']);
 
 $router->get('/projects', [ProjectController::class, 'get']);
 $router->post('/projects/create', [ProjectController::class, 'create']);
+$router->post('/projects/{projectId}/delete', [ProjectController::class, 'delete']);
 $router->post('/projects/generateCode', [ProjectController::class, 'generateCode']);
 
 $router->get('/projects/{projectId}/pages', [PageController::class, 'getAll']);

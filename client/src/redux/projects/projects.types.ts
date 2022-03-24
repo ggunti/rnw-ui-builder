@@ -10,6 +10,10 @@ export interface ProjectsState {
   loadingCreateProject: boolean;
   hasErrorCreateProject: boolean;
   errorMessageCreateProject: string;
+  // deleteProject
+  loadingDeleteProject: boolean;
+  hasErrorDeleteProject: boolean;
+  errorMessageDeleteProject: string;
   // generateProjectCode
   loadingGenerateProjectCode: boolean;
   hasErrorGenerateProjectCode: boolean;

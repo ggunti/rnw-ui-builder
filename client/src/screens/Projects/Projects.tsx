@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, FlatList, Platform } from 'react-native';
 import { ListItem, Text, Button, Overlay, Input } from 'react-native-elements';
-import { Layout } from '../../common';
+import { Layout, DeleteButton } from '../../common';
 import { ProjectType } from '../../types';
 
 interface ProjectsProps {
@@ -12,6 +12,7 @@ interface ProjectsProps {
   projects: ProjectType[];
   onPressProject: (id: number) => void;
   onPressEdit: (id: number) => void;
+  onDelete: (id: number) => void;
   addModalVisible: boolean;
   toggleAddModalVisible: () => void;
   newProjectName: string;
@@ -28,6 +29,10 @@ class Projects extends Component<ProjectsProps> {
       </ListItem.Content>
       <Button title='Preview' onPress={() => this.props.onPressProject(item.id)} />
       {Platform.OS === 'web' && <Button type='outline' title='Edit' onPress={() => this.props.onPressEdit(item.id)} />}
+      <DeleteButton
+        confirmQuestion='Do you really want to delete this project (including all pages)?'
+        onDelete={() => this.props.onDelete(item.id)}
+      />
     </ListItem>
   );
 

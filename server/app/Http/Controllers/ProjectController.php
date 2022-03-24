@@ -33,6 +33,17 @@ class ProjectController extends Controller
         return response()->json(['projects' => $projects]);
     }
 
+    public function delete($projectId)
+    {
+        $project = Project::find($projectId);
+        if ($project->userId !== auth()->user()->id) {
+            return response()->json(['message' => 'Unauthorized. You do not own this project!'], 401);
+        }
+        $project->pages()->delete();
+        $project->delete();
+        return response()->json(['project' => $project]);
+    }
+
     public function generateCode(Request $request)
     {
         $project = $request->input('project');

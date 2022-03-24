@@ -18,6 +18,11 @@ export const PROJECTS = {
   FINISH_LOADING_CREATE_PROJECT: 'finish_loading_create_project',
   SET_CREATE_PROJECT_ERROR: 'set_create_project_error',
   HIDE_CREATE_PROJECT_ERROR: 'hide_create_project_error',
+  // deleteProject
+  START_LOADING_DELETE_PROJECT: 'start_loading_delete_project',
+  FINISH_LOADING_DELETE_PROJECT: 'finish_loading_delete_project',
+  SET_DELETE_PROJECT_ERROR: 'set_delete_project_error',
+  HIDE_DELETE_PROJECT_ERROR: 'hide_delete_project_error',
   // generateProjectCode
   START_LOADING_GENERATE_PROJECT_CODE: 'start_loading_generate_project_code',
   FINISH_LOADING_GENERATE_PROJECT_CODE: 'finish_loading_generate_project_code',
@@ -79,6 +84,35 @@ export function createProject(
         const errMsg = getErrMsg(err.response.data);
         dispatch(finishLoadingCreateProject());
         dispatch(setCreateProjectError(errMsg));
+        onError(errMsg);
+      });
+  };
+}
+
+// deleteProject - function
+export const startLoadingDeleteProject = createAction(PROJECTS.START_LOADING_DELETE_PROJECT);
+export const finishLoadingDeleteProject = createAction(PROJECTS.FINISH_LOADING_DELETE_PROJECT);
+export const setDeleteProjectError = createAction(PROJECTS.SET_DELETE_PROJECT_ERROR);
+export const hideDeleteProjectError = createAction(PROJECTS.HIDE_DELETE_PROJECT_ERROR);
+
+export function deleteProject(
+  { projectId }: { projectId: number },
+  onSuccess: (project: ProjectType) => void = () => {},
+  onError: (errMsg: string) => void = () => {},
+): AppThunk<Promise<void>> {
+  return dispatch => {
+    dispatch(startLoadingDeleteProject());
+    return axios
+      .post(`/projects/${projectId}/delete`)
+      .then(res => res.data)
+      .then(data => {
+        dispatch(finishLoadingDeleteProject());
+        onSuccess(data.project);
+      })
+      .catch(err => {
+        const errMsg = getErrMsg(err.response.data);
+        dispatch(finishLoadingDeleteProject());
+        dispatch(setDeleteProjectError(errMsg));
         onError(errMsg);
       });
   };

@@ -11,6 +11,9 @@ import {
   // createProject - function
   createProject,
   hideCreateProjectError,
+  // deleteProject - function
+  deleteProject,
+  hideDeleteProjectError,
 } from '../../redux/actions';
 import { RootState } from '../../redux/store';
 import { StackParamList, ProjectType } from '../../types';
@@ -46,6 +49,15 @@ class ProjectsPage extends Component<ProjectsPageProps, ProjectsPageState> {
     this.props.navigation.navigate('projectEditor', { projectId: id });
   };
 
+  onDelete = (id: number) => {
+    const onSuccess = () => {
+      const projects = this.props.projects.filter(p => p.id !== id);
+      this.props.setProjects({ projects });
+    };
+    const onError = () => {};
+    this.props.deleteProject({ projectId: id }, onSuccess, onError);
+  };
+
   onPressAdd = () => {
     const { newProjectName } = this.state;
     const onSuccess = (project: ProjectType) => this.props.setProjects({ projects: [...this.props.projects, project] });
@@ -57,18 +69,26 @@ class ProjectsPage extends Component<ProjectsPageProps, ProjectsPageState> {
   onHideError = () => {
     this.props.hideGetProjectsError();
     this.props.hideCreateProjectError();
+    this.props.hideDeleteProjectError();
   };
 
   render() {
     return (
       <Projects
-        loading={this.props.loadingGetProjects || this.props.loadingCreateProject}
-        hasError={this.props.hasErrorGetProjects || this.props.hasErrorCreateProject}
-        errorMessage={this.props.errorMessageGetProjects + this.props.errorMessageCreateProject}
+        loading={this.props.loadingGetProjects || this.props.loadingCreateProject || this.props.loadingDeleteProject}
+        hasError={
+          this.props.hasErrorGetProjects || this.props.hasErrorCreateProject || this.props.hasErrorDeleteProject
+        }
+        errorMessage={
+          this.props.errorMessageGetProjects +
+          this.props.errorMessageCreateProject +
+          this.props.errorMessageDeleteProject
+        }
         onHideError={this.onHideError}
         projects={this.props.projects}
         onPressProject={this.onPressProject}
         onPressEdit={this.onPressEdit}
+        onDelete={this.onDelete}
         addModalVisible={this.state.addModalVisible}
         toggleAddModalVisible={() => this.setState(prevState => ({ addModalVisible: !prevState.addModalVisible }))}
         newProjectName={this.state.newProjectName}
@@ -89,6 +109,9 @@ const mapStateToProps = (state: RootState) => {
     loadingCreateProject,
     hasErrorCreateProject,
     errorMessageCreateProject,
+    loadingDeleteProject,
+    hasErrorDeleteProject,
+    errorMessageDeleteProject,
   } = state.projects;
   return {
     projects,
@@ -98,6 +121,9 @@ const mapStateToProps = (state: RootState) => {
     loadingCreateProject,
     hasErrorCreateProject,
     errorMessageCreateProject,
+    loadingDeleteProject,
+    hasErrorDeleteProject,
+    errorMessageDeleteProject,
   };
 };
 
@@ -110,6 +136,9 @@ const mapDispatch = {
   // createProject - function
   createProject,
   hideCreateProjectError,
+  // deleteProject - function
+  deleteProject,
+  hideDeleteProjectError,
 };
 
 const connector = connect(mapStateToProps, mapDispatch);
