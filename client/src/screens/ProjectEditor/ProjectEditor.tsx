@@ -3,7 +3,7 @@ import { View as RNView, TouchableOpacity, Platform, StyleSheet } from 'react-na
 import { Overlay, Input, Button, Text } from 'react-native-elements';
 import { Editor, Frame, Element } from '@craftjs/core';
 import _ from 'lodash';
-import { Layout } from '../../common';
+import { Layout, DeleteButton } from '../../common';
 import { RenderNode } from '../../UiEditor';
 import { draggableComponents, View } from '../../draggables';
 import { PageType } from '../../types';
@@ -26,8 +26,8 @@ interface ProjectEditorProps {
   addDisabled: boolean;
   onAddNewPage: () => void;
   onPressGenerate: () => void;
-  onPressDeletePage: (id: number) => void;
   onPressPage: (id: number) => void;
+  onDeletePage: (id: number) => void;
 }
 
 function ProjectEditor(props: ProjectEditorProps) {
@@ -52,7 +52,10 @@ function ProjectEditor(props: ProjectEditorProps) {
           <RNView key={id.toString()} style={styles.pageContainer}>
             <RNView style={styles.headerContainer}>
               <Text style={styles.title}>{name}</Text>
-              <Button title='Delete' onPress={() => props.onPressDeletePage(id)} />
+              <DeleteButton
+                confirmQuestion='Do you really want to delete this page?'
+                onDelete={() => props.onDeletePage(id)}
+              />
             </RNView>
             <TouchableOpacity
               onPress={() => props.onPressPage(id)}

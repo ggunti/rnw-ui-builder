@@ -85,19 +85,19 @@ class ProjectEditorPage extends Component<ProjectEditorPageProps, ProjectEditorP
     this.props.generateProjectCode({ project: { id: this.projectId, pages }, components }, onSuccess, onError);
   };
 
-  onPressDeletePage = (id: number) => {
+  onPressPage = (pageId: number) => {
+    const { projectId } = this;
+    // we unhover the clicked item in order to allow preview refresh when user comes back to this page
+    this.setState({ hoveredPageId: -1 }, () => this.props.navigation.navigate('pageEditor', { projectId, pageId }));
+  };
+
+  onDeletePage = (id: number) => {
     const onSuccess = () => {
       const pages = this.props.pages.filter(p => p.id !== id);
       this.props.setPages({ pages });
     };
     const onError = () => {};
     this.props.deletePage({ pageId: id }, onSuccess, onError);
-  };
-
-  onPressPage = (pageId: number) => {
-    const { projectId } = this;
-    // we unhover the clicked item in order to allow preview refresh when user comes back to this page
-    this.setState({ hoveredPageId: -1 }, () => this.props.navigation.navigate('pageEditor', { projectId, pageId }));
   };
 
   onHideError = () => {
@@ -139,8 +139,8 @@ class ProjectEditorPage extends Component<ProjectEditorPageProps, ProjectEditorP
         addDisabled={this.state.newPageName.length === 0}
         onAddNewPage={this.onAddNewPage}
         onPressGenerate={this.onPressGenerate}
-        onPressDeletePage={this.onPressDeletePage}
         onPressPage={this.onPressPage}
+        onDeletePage={this.onDeletePage}
       />
     );
   }
