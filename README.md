@@ -8,6 +8,15 @@ UI builder for android &amp; iOS &amp; web based on react-native-web.
 - There is a web app (the builder), which you can use to build the UI's of your pages inside any project. It's just drag and drop. You can also preview what you built directly in the web app.
 - There are two mobile apps (android & iOS), which you can use only to preview the pages of your projects which you built using the web app. This way you can see how your pages will look on mobile devices.
 
+### Capabilities
+Basically, you can use the web app to create projects and pages. Then build the UI for each page using drag and drop. After that you can use the web or mobile apps to preview the UI's on different platforms. The mobile apps are just for preview, as it is clarified in below table.
+
+| Platform | Create / Edit / Delete Project | Create / Edit / Delete Page | Build Page UI | Preview Page UI |
+| :---: | :---: | :---: | :---: | :---: |
+| web | ✅ | ✅ | ✅ | ✅ |
+| android | ❌ | ❌ | ❌ | ✅ |
+| ios | ❌ | ❌ | ❌ | ✅ |
+
 ### How to use it?
 1. Setup the project [locally](./LOCAL_SETUP.md), or just navigate to [RNW UI Builder](https://order-software.com/uiBuilder)
 2. Sign up and Login then:
