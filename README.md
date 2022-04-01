@@ -18,7 +18,7 @@ Basically, you can use the web app to create projects and pages. Then build the 
 | ios | ❌ | ❌ | ❌ | ✅ |
 
 ### How to use it?
-1. Setup the project [locally](./LOCAL_SETUP.md), or just navigate to [RNW UI Builder](https://order-software.com/uiBuilder)
+1. (Option 1) Setup the project [locally](./LOCAL_SETUP.md), or (Option 2) navigate to [RNW UI Builder](https://order-software.com/uiBuilder) and also download the [android version](https://play.google.com/store/apps/details?id=com.rnw_ui_builder) (iOS version coming soon on App Store).
 2. Sign up and Login then:
 
 https://user-images.githubusercontent.com/26307699/159668397-56772dab-efa7-4f04-9298-0613ec5270e2.mov
