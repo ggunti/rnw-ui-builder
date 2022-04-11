@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, GestureResponderEvent } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
-import { useNode, useEditor } from '@craftjs/core';
+import { useNode, useEditor, Node } from '@craftjs/core';
+import shortid from 'shortid';
 import { ROOT_NODE } from '@craftjs/utils';
 
 export const RenderNode = ({ render }: { render: any }) => {
@@ -64,6 +65,58 @@ export const RenderNode = ({ render }: { render: any }) => {
     return () => document.querySelector('.craftjs-renderer')?.removeEventListener('scroll', scroll);
   }, [scroll]);
 
+  // helper function to handle node cloning; it returns the tree that needs to be cloned
+  const getCloneTree = (idToClone: string) => {
+    const tree = query.node(idToClone).toNodeTree();
+    const newNodes: { [nodeId: string]: string } = {};
+
+    const changeNodeId = (node: Node, newParentId: string | undefined) => {
+      const newNodeId = shortid();
+      const childNodes = node.data.nodes.map((childId: string) => changeNodeId(tree.nodes[childId], newNodeId));
+      const linkedNodes = Object.keys(node.data.linkedNodes).reduce((accum, id) => {
+        // @ts-ignore
+        const newNodeId = changeNodeId(tree.nodes[node.data.linkedNodes[id]], newNodeId);
+        return { ...accum, [id]: newNodeId };
+      }, {});
+
+      let tmpNode = {
+        ...node,
+        id: newNodeId,
+        data: {
+          ...node.data,
+          parent: newParentId || node.data.parent,
+          nodes: childNodes,
+          linkedNodes,
+        },
+      };
+      let freshnode = query.parseFreshNode(tmpNode).toNode();
+      newNodes[newNodeId] = freshnode;
+      return newNodeId;
+    };
+
+    const rootNodeId = changeNodeId(tree.nodes[tree.rootNodeId], undefined);
+    return { rootNodeId, nodes: newNodes };
+  };
+
+  // main function to handle node cloning; check https://github.com/prevwong/craft.js/issues/209#issuecomment-795221484
+  const handleClone = (e: GestureResponderEvent, id: string) => {
+    e.preventDefault();
+    const theNode = query.node(id).get();
+    const parentNode = query.node(theNode.data.parent).get();
+    const indexToAdd = parentNode.data.nodes.indexOf(id);
+    const tree = getCloneTree(id);
+    actions.addNodeTree(tree, parentNode.id, indexToAdd + 1);
+
+    // uncomment this code block to have the clone
+    // function to work properly
+    /*
+    setTimeout(function () {
+      actions.deserialize(query.serialize());
+      actions.selectNode(tree.rootNodeId);
+    }, 100);
+    */
+  };
+
   return (
     <>
       {isHover || isActive
@@ -97,6 +150,11 @@ export const RenderNode = ({ render }: { render: any }) => {
               {deletable && (
                 <TouchableOpacity style={styles.iconContainer} onPress={() => actions.delete(id)}>
                   <Icon size={20} name='trash' type='feather' />
+                </TouchableOpacity>
+              )}
+              {id !== ROOT_NODE && (
+                <TouchableOpacity style={styles.iconContainer} onPress={e => handleClone(e, id)}>
+                  <Icon size={20} name='clone' type='font-awesome' />
                 </TouchableOpacity>
               )}
             </View>,
