@@ -56,7 +56,7 @@ Features:
 - [ ] Support for defining and using props for UI screens
 - [ ] Preview auto-refresh when a change is made in the UI screen
 - [ ] Multiple users per project
-- [ ] Ability to copy components (including its children) while building a UI
+- [x] Ability to copy components (including its children) while building a UI
 
 ### How to run it?
 * You can setup this UI builder to run locally on your machine. Check [local setup](./LOCAL_SETUP.md).
