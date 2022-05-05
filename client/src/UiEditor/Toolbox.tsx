@@ -2,7 +2,7 @@ import React from 'react';
 import { View as RNView, TouchableOpacity, StyleSheet } from 'react-native';
 import { Text as RNText, Icon as RNEIcon } from 'react-native-elements';
 import { Element, useEditor } from '@craftjs/core';
-import { View, Text, Button, Input, Image, Icon } from '../draggables';
+import { View, Text, Button, Input, Image, Icon, Divider } from '../draggables';
 
 interface ToolboxElementProps {
   title: string;
@@ -68,6 +68,11 @@ const Toolbox: React.FC<ToolboxProps> = () => {
           title='Icon'
           icon={{ name: 'emoticon-kiss-outline', type: 'material-community' }}
           ref={ref => connectors.create(ref as any, <Icon />)}
+        />
+        <ToolboxElement
+          title='Divider'
+          icon={{ name: 'horizontal-rule', type: 'material' }}
+          ref={ref => connectors.create(ref as any, <Divider />)}
         />
       </RNView>
     </RNView>
